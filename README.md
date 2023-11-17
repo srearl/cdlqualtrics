@@ -38,11 +38,11 @@ An installation of R and several libraries are required. The following steps nee
 
 ### formatting
 
-1. Format a csv file downloaded from Qualtrics with the `format_excel` function from the cdlqualtrics package. In this example, we are formatting observation data from the MWF multi-age class from the Fall 2023 semester. Modify the class and semester arguments passed to the `format_excel` function in accordance with the data file.
+1. Format a csv file downloaded from Qualtrics with the `format_excel` function from the cdlqualtrics library. In this example, we are formatting observation data from the MWF multi-age class from the Fall 2023 semester. Modify the class and semester arguments passed to the `format_excel` function in accordance with the data file.
 
 ![](inst/image/rstudio_format_excel.png)
 *Format a csv file downloaded from Qualtrics with the `format_excel` function, here formatting data from the MWF multi-age Fall 2023 class:  
-cdlqualtrics::format_excel(qualtrics_file = "")*
+cdlqualtrics::format_for_excel(qualtrics_file = "Fall 2022 CSL Observation Sheets MWF Multi-Age_October 4, 2023_07.45.csv", class = "MWFMulti", semester = "F23")*
 
 #### output
 
@@ -54,7 +54,7 @@ If run successfully, output from the call to `format_excel` is an appropriately 
 Both the files downloaded from Qualtrics and any files that have been formatted are in the working directory identified in *file navigation step 2* above. From here, the formatted files can be moved to the directory accessible by the Observation Query Excel spreadsheet.
 
 ![](inst/image/windows_explorer_in_out.png)
-*Transfer formatted files, here output from the FAll 2023 MWF multi-age class, as needed for use with the Observation Query Excel spreadsheet*
+*Transfer formatted files, here output from the Fall 2023 MWF multi-age class, as needed for use with the Observation Query Excel spreadsheet*
 
 ### codebook
 
