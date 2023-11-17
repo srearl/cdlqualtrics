@@ -1,6 +1,6 @@
 ## cdlqualtrics
 
-*R-based tools to format Qualtrics behaviour observation data*
+**R-based tools to format Qualtrics behaviour observation data**
 
 ### overview
 
@@ -8,9 +8,34 @@ Presented here is an R-based tool to format data collected in Qualtrics so as to
 
 ### installation
 
-An installation of R is required. The easiest way to interface with R, particularly on machines running Windows, is through the RStudio IDE. Instructions for installing R and RStudio are available through [Posit](https://posit.co/download/rstudio-desktop/), or they can be accessed through the [ASU software center](https://ets.engineering.asu.edu/softwareage/software/). Once installed, the `remotes` library will facilitate installing the tools to format the Qualtrics data.
+An installation of R and several libraries are required. The following steps need to be run only once on any given computer.
+
+1. The easiest way to interface with R, particularly on machines running Windows, is through the RStudio IDE. Instructions for installing R and RStudio are available through [Posit](https://posit.co/download/rstudio-desktop/), or they can be accessed through the [ASU software center](https://ets.engineering.asu.edu/softwareage/software/). 
+
+2. Once R and RStudio are installed, install the `remotes` library to facilitate installing the cdlqualtrics library to format the Qualtrics data.
 
 ![](inst/image/rstudio_install_remotes.png)
-<figcaption>Install the `remotes` library by issuing the command `install.packages("remotes") in the RStudio interface.</figcaption>
+*Install the `remotes` library by issuing the command `r install.packages("remotes")` in the RStudio interface.*
+
+3. Use the `remotes` library to install the cdlqualtrics library from GitHub that has the formatting tools.
+
+![](inst/image/rstudio_install_qualtrics.png)
+*Install the `cdlqualtrics` library by issuing the command `r remotes::install_github("srearl/cdlqualtrics")` in the RStudio interface.*
+
+### application
+
+### file navigation
+
+1. Using the Files tab within the RStudio interface, navigate to the directory where the files downloaded from Qualtrics are located.
 
 ![](inst/image/rstudio_directory_naviation.png)
+*Navigate to the directory where the files downloaded from Qualtrics are located (`qualtrics_downloads` in this example)*
+
+2. Under the `More` select the option to `Set As Working Directory` to make the directory where the Qualtrics files have been downloaded the active directory.
+
+![](inst/image/rstudio_set_working_dir.png)
+*Set the directory where the Qualtrics files have been downloaded as the working directory*
+
+### formatting
+
+1.
