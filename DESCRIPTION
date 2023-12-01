@@ -1,10 +1,10 @@
-Package: cdlqualtrics
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Package: cslqualtrics
+Title: R-based tools to format Qualtrics behaviour observation data
+Version: 0.1.0
 Authors@R: 
     person("Stevan", "Earl", , "stevan.earl@asu.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4465-452X"))
-Description: What the package does (one paragraph).
+Description: Presented here is an R-based tool to format data collected in Qualtrics so as to be compatible with the data structure expected by a Observation Query Excel spreadsheet that is used to visualize patterns in the observation data. The formatting function requires as inputs the name of the file, along with the year and semester associated with the observation data. The output is a tabular csv file appropriately named with the class type, year, and semester in the working directory and of a format in keeping with existing data. The formatted file can then be transferred to a directory holding files from other classes, semesters that have similar formatting that are sourced by the Observation Query Excel spreadsheet.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
