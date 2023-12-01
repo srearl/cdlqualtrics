@@ -1,4 +1,4 @@
-## cdlqualtrics
+## cslqualtrics
 
 **R-based tools to format Qualtrics behaviour observation data**
 
@@ -12,15 +12,15 @@ An installation of R and several libraries are required. The following steps nee
 
 1. The easiest way to interface with R, particularly on machines running Windows, is through the RStudio IDE. Instructions for installing R and RStudio are available through [Posit](https://posit.co/download/rstudio-desktop/), or they can be accessed through the [ASU software center](https://ets.engineering.asu.edu/softwareage/software/). 
 
-2. Once R and RStudio are installed, install the `remotes` library to facilitate installing the cdlqualtrics library to format the Qualtrics data.
+2. Once R and RStudio are installed, install the `remotes` library to facilitate installing the cslqualtrics library to format the Qualtrics data.
 
 ![](inst/image/rstudio_install_remotes.png)
-*Install the `remotes` library by issuing the command `r install.packages("remotes")` in the RStudio interface.*
+*Install the `remotes` library by issuing the command `install.packages("remotes")` in the RStudio interface.*
 
-3. Use the `remotes` library to install the cdlqualtrics library from GitHub that has the formatting tools.
+3. Use the `remotes` library to install the cslqualtrics library from GitHub that has the formatting tools.
 
 ![](inst/image/rstudio_install_qualtrics.png)
-*Install the `cdlqualtrics` library by issuing the command `r remotes::install_github("srearl/cdlqualtrics")` in the RStudio interface.*
+*Install the `cslqualtrics` library by issuing the command `remotes::install_github("srearl/cslqualtrics")` in the RStudio interface.*
 
 ### application
 
@@ -38,11 +38,11 @@ An installation of R and several libraries are required. The following steps nee
 
 ### formatting
 
-1. Format a csv file downloaded from Qualtrics with the `format_excel` function from the cdlqualtrics library. In this example, we are formatting observation data from the MWF multi-age class from the Fall 2023 semester. Modify the class and semester arguments passed to the `format_excel` function in accordance with the data file.
+1. Format a csv file downloaded from Qualtrics with the `format_excel` function from the cslqualtrics library. In this example, we are formatting observation data from the MWF multi-age class from the Fall 2023 semester. Modify the class and semester arguments passed to the `format_excel` function in accordance with the data file.
 
 ![](inst/image/rstudio_format_excel.png)
 *Format a csv file downloaded from Qualtrics with the `format_excel` function, here formatting data from the MWF multi-age Fall 2023 class:  
-cdlqualtrics::format_for_excel(qualtrics_file = "Fall 2022 CSL Observation Sheets MWF Multi-Age_October 4, 2023_07.45.csv", class = "MWFMulti", semester = "F23")*
+cslqualtrics::format_for_excel(qualtrics_file = "Fall 2022 CSL Observation Sheets MWF Multi-Age_October 4, 2023_07.45.csv", class = "MWFMulti", semester = "F23")*
 
 #### output
 
