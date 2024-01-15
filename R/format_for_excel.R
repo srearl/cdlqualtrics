@@ -71,10 +71,16 @@ format_for_excel <- function(
 
   from_file[from_file == ""] <- NA # empty strings to NA (need to TEST that this does not alter the Excel functionality)
 
-  colnames(from_file)[colnames(from_file) == "RecordedDate"] <- "Date" # rename
-  colnames(from_file)[colnames(from_file) == "ResponseId"]   <- "ResponseID" # rename
+  # rename selected columns
 
-  from_file$Date <- as.Date(from_file$Date, format = "%Y-%m-%d") # apply date format
+  colnames(from_file)[colnames(from_file) == "RecordedDate"]   <- "Date" # rename
+  colnames(from_file)[colnames(from_file) == "ResponseId"]     <- "ResponseID" # rename
+  colnames(from_file)[grepl("Q31.*TEXT", colnames(from_file))] <- "Q31_TEXT" # rename
+
+  # format date
+
+  from_file$Date <- as.Date(from_file$Date, format = "%Y-%m-%d")
+  from_file$Date <- format(from_file$Date, format = "%m/%d/%Y")
 
   # generate unique records for multi-child observations
 
@@ -168,16 +174,16 @@ format_for_excel <- function(
   from_file <- from_file[, c(
     "Class",
     "Semester",
-    "Date",
     "Kid",
     "ResponseID",
+    "Date",
     "Q1",
     "Q3",
     "Q4",
     "Other",
     "Q30",
     "Q31",
-    "Q31_17_TEXT",
+    "Q31_TEXT",
     "Q32"
   )]
 
@@ -186,7 +192,8 @@ format_for_excel <- function(
   write.csv(
     x         = from_file,
     file      = paste0(class, "_", semester, ".csv"),
-    row.names = FALSE
+    row.names = FALSE,
+    na        = ""
   )
 
 }
