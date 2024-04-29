@@ -7,28 +7,58 @@ ui <- bslib::page_navbar(
   theme    = this_theme,
 
   bslib::nav_panel(
-    title = "explore data",
+    title = "utilities",
+    p("database administration"),
 
     shiny::fluidRow(
 
-      shiny::column(
-        width = 2,
-        shiny::actionButton(
-          inputId = "query_database",
-          label   = "load data",
-          class   = "btn-success"
-        )
-      ),
+      bslib::card(
 
-      shiny::column(width = 10)
+        bslib::layout_sidebar(
+          fillable = TRUE,
+          sidebar  = bslib::sidebar(
+            position = "right",
+            open     = TRUE,
 
-      # shiny::actionButton(
-      #   inputId = "query_database",
-      #   label   = "load data",
-      #   class   = "btn-success"
-      # ),
+            shiny::actionButton(
+              inputId = "check_for_updates",
+              label   = "check for updates",
+              class   = "btn-success"
+            ),
 
-    ), # close fluidRow
+            shiny::actionButton(
+              inputId = "update_database",
+              label   = "add updates",
+              class   = "btn-success"
+            )
+
+          ), # close sidebar
+          DT::DTOutput("new_surveys_view"),
+        ) # close layout_sidebar
+
+      ) # close card
+
+    ), # close top fluidRow
+
+  ),
+
+  bslib::nav_panel(
+    title = "explore data",
+
+    # shiny::fluidRow(
+
+    #   shiny::column(
+    #     width = 2,
+    #     shiny::actionButton(
+    #       inputId = "query_database",
+    #       label   = "load data",
+    #       class   = "btn-success"
+    #     )
+    #   ),
+
+    #   shiny::column(width = 10)
+
+    # ), # close fluidRow
 
     shiny::br(),
 
@@ -42,6 +72,11 @@ ui <- bslib::page_navbar(
             position = "right",
             open     = TRUE,
 
+            shiny::actionButton(
+              inputId = "query_database",
+              label   = "load data",
+              class   = "btn-success"
+            ),
             shiny::selectInput(
               inputId   = "observation_students",
               label     = "students",
@@ -71,11 +106,7 @@ ui <- bslib::page_navbar(
     # br()
     # shiny::verbatimTextOutput(outputId = "mod_vals")
 
-  ), # close nav_panel
+  ) # close nav_panel #2
 
-  bslib::nav_panel(
-    title = "utilities",
-    p("database admin")
-  )
 
 ) # close page_navbar

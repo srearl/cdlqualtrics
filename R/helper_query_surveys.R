@@ -21,8 +21,8 @@ query_surveys <- function() {
       surveys.class,
       surveys.reliability,
       obs_count.obs,
-      surveys.last_modified_date AS last_modified,
-      surveys.creation_date_date AS created
+      surveys.last_modified,
+      surveys.creation_date AS created
     FROM
       surveys
     JOIN
@@ -36,7 +36,7 @@ query_surveys <- function() {
           survey_id
       ) AS obs_count ON (obs_count.survey_id = surveys.id)
     ORDER BY
-      surveys.last_modified_date DESC
+      surveys.last_modified DESC
     ;
     ",
     .con = DBI::ANSI()
@@ -61,7 +61,7 @@ query_surveys <- function() {
 #     class,
 #     reliability,
 #     last_modified_date AS last_modified,
-#     creation_date_date AS created
+#     creation_date AS created
 #   FROM
 #     surveys
 #   WHERE
