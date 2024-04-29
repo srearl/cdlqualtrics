@@ -156,7 +156,13 @@ server <- function(input, output, session) {
 
     surveys_api <- qualtRics::all_surveys()
     surveys_api <- format_surveys(surveys_api)
-    surveys_db  <- query_surveys()
+
+    # here we query all surveys (i.e., not query_suverys())
+    surveys_all_query <- glue::glue_sql(
+      "SELECT * FROM surveys ;",
+      .con = DBI::ANSI()
+    )
+    surveys_db  <- run_interpolated_query(surveys_all_query)
 
     surveys_new <- dplyr::full_join(
       x = surveys_api,
@@ -166,7 +172,42 @@ server <- function(input, output, session) {
       by = c("id")
     ) |>
       dplyr::filter(is.na(source_db)) |>
-      dplyr::mutate(status = "new")
+      dplyr::mutate(status = "new") |>
+      dplyr::select(-source_db)
+
+    surveys_updated <- dplyr::inner_join(
+      x = surveys_api,
+      y = surveys_db |>
+        dplyr::select(id, last_modified) |>
+        dplyr::rename(last_modified_db = last_modified),
+      by = c("id"),
+      suffix = c("_api", "_db")
+    ) |>
+      dplyr::filter(last_modified > last_modified_db) |>
+      dplyr::mutate(status = "updated") |>
+      dplyr::select(-last_modified_db)
+
+    new_or_updated <- dplyr::bind_rows(
+      surveys_new,
+      surveys_updated
+    )
+
+    if (nrow(new_or_updated) > 0) {
+
+      return(new_or_updated)
+
+    } else {
+
+      return(NULL)
+
+      shiny::showNotification(
+        ui          = "database is up to date",
+        duration    = 5,
+        closeButton = TRUE,
+        type        = "message"
+      )
+
+    }
 
   }) |> shiny::bindEvent(input$check_for_updates)
 
@@ -226,7 +267,6 @@ server <- function(input, output, session) {
     )
   ) # close output$new_surveys_view
 
-
   # sqlite.surveys.cols
   #   "id"
   #   "name"
@@ -239,24 +279,13 @@ server <- function(input, output, session) {
   #   "class"
   #   "reliability"       
 
-
   shiny::observeEvent(input$update_database, {
 
+    shiny::req(nrow(new_surveys_reactive()) > 0)
+
     new_surveys_upload <- new_surveys_reactive() |>
-      dplyr::select(
-        id,
-        name,
-        owner_id,
-        last_modified,
-        creation_date,
-        is_active,
-        # last_modified_date,
-        # creation_date_date,
-        semester,
-        year,
-        class,
-        reliability       
-      )
+      dplyr::filter(status == "new")
+      dplyr::select(-status)
 
     tryCatch({
 
@@ -329,7 +358,7 @@ server <- function(input, output, session) {
   # shiny::observe(print(surveys_data_reactive()))
   # shiny::observe(print(surveys_data_reactive()[input$surveys_data_view_rows_selected, ]$id))
   # shiny::observe(print(head(observations_data_reactive())))
-  shiny::observe(print(head(new_surveys_reactive())))
+  shiny::observe(print(new_surveys_reactive() |> data.frame()))
   # shiny::observe(print(input$surveys_data_view_rows_selected))
   # shiny::observe(print(head(behaviour_view())))
 

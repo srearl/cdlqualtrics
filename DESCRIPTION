@@ -15,4 +15,5 @@ Imports:
     DT,
     echarts4r,
     glue,
+    qualtRics,
     shiny

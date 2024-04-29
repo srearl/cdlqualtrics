@@ -21,15 +21,21 @@ ui <- bslib::page_navbar(
             open     = TRUE,
 
             shiny::actionButton(
-              inputId = "check_for_updates",
-              label   = "check for updates",
+              inputId = "authenticate",
+              label   = "authenticate",
               class   = "btn-success"
             ),
 
-            shiny::actionButton(
-              inputId = "update_database",
-              label   = "add updates",
-              class   = "btn-success"
+            bslib::input_task_button(
+              id    = "check_for_updates",
+              label = "check for updates"
+              # class   = "btn-success"
+            ),
+
+            bslib::input_task_button(
+              id    = "update_database",
+              label = "add updates"
+              # class   = "btn-success"
             )
 
           ), # close sidebar
@@ -77,6 +83,7 @@ ui <- bslib::page_navbar(
               label   = "load data",
               class   = "btn-success"
             ),
+
             shiny::selectInput(
               inputId   = "observation_students",
               label     = "students",
