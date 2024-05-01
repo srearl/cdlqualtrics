@@ -198,14 +198,14 @@ server <- function(input, output, session) {
 
     } else {
 
-      return(NULL)
-
       shiny::showNotification(
         ui          = "database is up to date",
         duration    = 5,
         closeButton = TRUE,
         type        = "message"
       )
+
+      return(NULL)
 
     }
 
@@ -214,18 +214,22 @@ server <- function(input, output, session) {
 
   output$new_surveys_view <- DT::renderDT({
 
-    new_surveys_reactive() |>
-      dplyr::select(
-        id,
-        name,
-        creation_date,
-        is_active,
-        semester,
-        year,
-        class,
-        reliability,
-        status
-      )
+    if (!is.null(new_surveys_reactive())) {
+
+      new_surveys_reactive() # |>
+        # dplyr::select(
+        #   id,
+        #   name,
+        #   creation_date,
+        #   is_active,
+        #   semester,
+        #   year,
+        #   class,
+        #   reliability,
+        #   status
+        # )
+
+    }
 
   },
     class      = c("compact"),
@@ -283,8 +287,12 @@ server <- function(input, output, session) {
 
     shiny::req(nrow(new_surveys_reactive()) > 0)
 
-    new_surveys_upload <- new_surveys_reactive() |>
+    new_surveys <- new_surveys_reactive() |>
       dplyr::filter(status == "new")
+      dplyr::select(-status)
+
+    updated_surveys <- new_surveys_reactive() |>
+      dplyr::filter(status == "updated")
       dplyr::select(-status)
 
     tryCatch({
@@ -293,10 +301,12 @@ server <- function(input, output, session) {
         pool = this_pool,
         func = function(conn) {
 
-          surveys_inserted <- DBI::dbWriteTable(
+          # add new surveys
+
+          DBI::dbWriteTable(
             conn      = this_pool,
             name      = "surveys",
-            value     = new_surveys_upload,
+            value     = new_surveys,
             overwrite = FALSE,
             append    = TRUE,
             row.names = FALSE,
@@ -307,8 +317,6 @@ server <- function(input, output, session) {
               last_modified,
               creation_date,
               is_active,
-              # last_modified_date,
-              # creation_date_date,
               semester,
               year,
               class,
@@ -316,7 +324,36 @@ server <- function(input, output, session) {
             )
           )
 
-        }
+          # update time of updated surveys
+
+          glue::glue_sql("
+            UPDATE surveys
+            SET last_modified = { updated_surveys$last_modified }
+            WHERE id = { updated_surveys$id }
+            ;
+            ",
+            .con = DBI::ANSI()
+          )
+
+          # delete observations of updated surveys
+
+          glue::glue_sql("
+            DELETE from observations
+            WHERE id = { updated_surveys$id }
+            ;
+            ",
+            .con = DBI::ANSI()
+          )
+
+          # add obsevations for new and updated surveys
+
+          split(
+            x = new_surveys_reactive(),
+            f = new_surveys_reactive()$id
+          ) |> 
+            {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id))}()
+
+        } # close poolWithTransaction func
       ) # close poolWithTransaction
 
     }, warning = function(warn) {
