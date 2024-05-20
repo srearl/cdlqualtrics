@@ -1,0 +1,28 @@
+---
+title: "create-database"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{create-database}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cslqualtrics)
+```
+
+At an appropriate location, create the database and schema with the `csl_db_create.sh` script stored in the `inst/bash` directory of this package.
+
+Connect to the database and enable PRAGMA.
+
+```{r db_connect_pragma}
+csl_obs_db <- DBI::dbConnect(RSQLite::SQLite(), "/tmp/cslobsdb.db", shutdown = TRUE)
+DBI::dbExecute(csl_obs_db, "PRAGMA foreign_keys = ON ;")
+```

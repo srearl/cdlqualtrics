@@ -12,13 +12,13 @@
 #' Although not accessible through the web interface, querying survey data
 #' through the API can return multiple survey instances for a given year,
 #' semester, class, reliability combination. It is not clear the reason for
-#' more than once instance of the same survey, but the observation data are
+#' more than one instance of the same survey, but the observation data are
 #' different among them. Only the most recently modified survey among a
 #' duplicate set is returned.
 #'
 #' @param surveys
 #' (character) Data frame of surveys resulting from a call to
-#' qualtRics::all_surveys()
+#' `qualtRics::all_surveys()`
 #'
 #' @return A formatted data frame of Qualtrics survey data
 #'
@@ -26,12 +26,16 @@
 #'
 format_surveys <- function(surveys) {
 
-  observation_surveys <- surveys[grepl("sheet", surveys$name, ignore.case = TRUE), ]
-  observation_surveys <- observation_surveys[!grepl("copy", observation_surveys$name, ignore.case = TRUE), ] 
-  observation_surveys <- observation_surveys[!grepl("- 2", observation_surveys$name, ignore.case = TRUE), ] # 2015 "- 2"
-  observation_surveys <- observation_surveys[observation_surveys$id != "SV_6llGtw3tYcJg6hf", ] # actual date unclear
+  # `spring` is misspelled in survey SV_6llGtw3tYcJg6hf
+  if (any(grepl("SV_6llGtw3tYcJg6hf", surveys$id, ignore.case = TRUE))) {
 
-  surveys_filtered <- observation_surveys |> 
+    surveys[surveys$id == "SV_6llGtw3tYcJg6hf", ]$name <- "Reliability Spring 2018 CSL Observation Sheet T/TH Two's & Three's"
+
+  }
+
+  observation_surveys <- surveys[grepl("spring|summer|fall", surveys$name, ignore.case = TRUE), ]
+
+  surveys_filtered <- observation_surveys |>
     dplyr::mutate(
       # date and timestamp actions
       lastModified = as.POSIXct(
@@ -43,12 +47,18 @@ format_surveys <- function(surveys) {
         format = "%Y-%m-%dT%H:%M:%SZ"
       ),
       semester = dplyr::case_when(
-        lubridate::month(creationDate) >= 1 & lubridate::month(creationDate) <= 4  ~ "spring",
-        lubridate::month(creationDate) >= 8 & lubridate::month(creationDate) <= 12 ~ "fall",
-        lubridate::month(creationDate) >= 5 & lubridate::month(creationDate) <= 7  ~ "summer",
+        grepl("spring", name, ignore.case = TRUE) ~ "spring",
+        grepl("summer", name, ignore.case = TRUE) ~ "summer",
+        grepl("fall",   name, ignore.case = TRUE) ~ "fall",
         TRUE ~ NA_character_
       ),
-      year = lubridate::year(creationDate),
+      year = stringr::str_extract(name, "[0-9]{4,}"),
+      year = as.integer(year),
+      # fix summer sans year in name
+      year = dplyr::case_when(
+        id == "SV_3Po51xk4m7SBxEq" ~ 2022,
+        TRUE ~ year
+      ),
       class = dplyr::case_when(
         grepl("t.th", name, ignore.case = TRUE) & grepl("two", name, ignore.case = TRUE) ~ "TTh_23",
         grepl("t.th", name, ignore.case = TRUE) & (grepl("three", name, ignore.case = TRUE) & !grepl("two", name, ignore.case = TRUE)) ~ "TTh_three",
@@ -63,15 +73,17 @@ format_surveys <- function(surveys) {
         grepl("mwf", name, ignore.case = TRUE) & grepl("older", name, ignore.case = TRUE) ~ "MWF_older",
         grepl("mwf", name, ignore.case = TRUE) & grepl("younger", name, ignore.case = TRUE) ~ "MWF_younger",
         grepl("pre.k", name, ignore.case = TRUE) ~ "Pre_K",
+        # generic summer classes
+        grepl("older", name, ignore.case = TRUE) & !(grepl("mwf", name, ignore.case = TRUE) & !grepl("tth", name, ignore.case = TRUE)) ~ "older",
+        grepl("younger", name, ignore.case = TRUE) & !(grepl("mwf", name, ignore.case = TRUE) & !grepl("tth", name, ignore.case = TRUE)) ~ "younger",
         TRUE ~ NA
       ),
       reliability = dplyr::case_when(
         grepl("reliability", name, ignore.case = TRUE) ~ TRUE,
         TRUE ~ FALSE
       )
-    ) |> 
-    janitor::clean_names() |> 
-    dplyr::filter(!is.na(class))
+    ) |>
+    janitor::clean_names()
 
   # summarise to identify the details of the surveys where the last_modified_date
   # is the most recent for a given combination of semester, year, class, and
@@ -104,6 +116,29 @@ format_surveys <- function(surveys) {
       last_modified = as.character(last_modified),
       creation_date = as.character(creation_date)
     )
+
+
+  # check that all semester year class are populated
+
+  if (
+    any(
+      is.na(surveys_most_recent$semester),
+      is.na(surveys_most_recent$year),
+      is.na(surveys_most_recent$class)
+    )
+  ) {
+
+    shiny::showNotification(
+      ui          = "semester, year, or class not determined for at least one survey",
+      duration    = 5,
+      closeButton = TRUE,
+      type        = "error"
+    )
+
+    stop()
+
+  }
+
 
   return(surveys_most_recent)
 

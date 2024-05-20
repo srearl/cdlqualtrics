@@ -139,7 +139,7 @@ server <- function(input, output, session) {
         per_cent = round((n / student_behaviours_sum) * 100)
       ) |>
       dplyr::ungroup() |>
-      echarts4r::e_charts(response) |> 
+      echarts4r::e_charts(response) |>
       echarts4r::e_bar(per_cent, name = "behaviour", legend = FALSE) |>
       echarts4r::e_tooltip(trigger = "axis") |>
       echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 315)) |>
@@ -209,7 +209,8 @@ server <- function(input, output, session) {
 
     }
 
-  }) |> shiny::bindEvent(input$check_for_updates)
+  }) |>
+    shiny::bindEvent(input$check_for_updates)
 
 
   output$new_surveys_view <- DT::renderDT({
@@ -217,17 +218,17 @@ server <- function(input, output, session) {
     if (!is.null(new_surveys_reactive())) {
 
       new_surveys_reactive() # |>
-        # dplyr::select(
-        #   id,
-        #   name,
-        #   creation_date,
-        #   is_active,
-        #   semester,
-        #   year,
-        #   class,
-        #   reliability,
-        #   status
-        # )
+      # dplyr::select(
+      #   id,
+      #   name,
+      #   creation_date,
+      #   is_active,
+      #   semester,
+      #   year,
+      #   class,
+      #   reliability,
+      #   status
+      # )
 
     }
 
@@ -278,21 +279,21 @@ server <- function(input, output, session) {
   #   "last_modified"
   #   "creation_date"
   #   "is_active"
-  #   "semester"          
+  #   "semester"
   #   "year"
   #   "class"
-  #   "reliability"       
+  #   "reliability"
 
   shiny::observeEvent(input$update_database, {
 
     shiny::req(nrow(new_surveys_reactive()) > 0)
 
     new_surveys <- new_surveys_reactive() |>
-      dplyr::filter(status == "new")
+      dplyr::filter(status == "new") |>
       dplyr::select(-status)
 
     updated_surveys <- new_surveys_reactive() |>
-      dplyr::filter(status == "updated")
+      dplyr::filter(status == "updated") |>
       dplyr::select(-status)
 
     tryCatch({
@@ -320,7 +321,7 @@ server <- function(input, output, session) {
               semester,
               year,
               class,
-              reliability       
+              reliability
             )
           )
 
@@ -350,7 +351,7 @@ server <- function(input, output, session) {
           split(
             x = new_surveys_reactive(),
             f = new_surveys_reactive()$id
-          ) |> 
+          ) |>
             {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id))}()
 
         } # close poolWithTransaction func

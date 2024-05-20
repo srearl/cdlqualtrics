@@ -1,0 +1,18 @@
+---
+title: "create-database"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{create-database}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+
+```r
+library(cslqualtrics)
+#> Error in library(cslqualtrics): there is no package called 'cslqualtrics'
+```
+
+At an appropriate location, create the database and schema with the `csl_db_create.sh` script stored in the `inst/bash` directory of this package.

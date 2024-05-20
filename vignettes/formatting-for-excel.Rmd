@@ -35,12 +35,10 @@ An installation of R and several libraries are required. The following steps nee
 
 2. Once R and RStudio are installed, install the `remotes` library to facilitate installing the cslqualtrics library to format the Qualtrics data.
 
-![](../inst/image/rstudio_install_remotes.png)
 *Install the `remotes` library by issuing the command `install.packages("remotes")` in the RStudio interface.*
 
 3. Use the `remotes` library to install the cslqualtrics library from GitHub that has the formatting tools.
 
-![](../inst/image/rstudio_install_qualtrics.png)
 *Install the `cslqualtrics` library by issuing the command `remotes::install_github("srearl/cslqualtrics")` in the RStudio interface.*
 
 ### application
