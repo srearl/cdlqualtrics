@@ -15,5 +15,11 @@ Imports:
     DT,
     echarts4r,
     glue,
+    pool,
     qualtRics,
+    RSQLite,
     shiny
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
