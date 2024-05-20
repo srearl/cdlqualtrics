@@ -26,6 +26,8 @@ ui <- bslib::page_navbar(
               class   = "btn-success"
             ),
 
+            "SURVEYS",
+
             bslib::input_task_button(
               id    = "check_for_updates",
               label = "check for updates"
@@ -36,7 +38,9 @@ ui <- bslib::page_navbar(
               id    = "update_database",
               label = "add updates"
               # class   = "btn-success"
-            )
+            ),
+
+            "OBSERVATIONS"
 
           ), # close sidebar
           DT::DTOutput("new_surveys_view"),

@@ -111,7 +111,7 @@ server <- function(input, output, session) {
 
     # get the response ids of all data corresponding to the selected student by
     # filtering observation data on the name of that student (precisely!)
-    # reflected in the response column (only!) associted with q2_ questions
+    # reflected in the response column (only!) associated with q2_ questions
 
     student_responses_ids <- observations_data_reactive()[
     observations_data_reactive()$response == input$observation_students &
@@ -157,7 +157,7 @@ server <- function(input, output, session) {
     surveys_api <- qualtRics::all_surveys()
     surveys_api <- format_surveys(surveys_api)
 
-    # here we query all surveys (i.e., not query_suverys())
+    # here we query all surveys (i.e., not query_surveys())
     surveys_all_query <- glue::glue_sql(
       "SELECT * FROM surveys ;",
       .con = DBI::ANSI()
@@ -345,7 +345,7 @@ server <- function(input, output, session) {
             .con = DBI::ANSI()
           )
 
-          # add obsevations for new and updated surveys
+          # add observations for new and updated surveys
 
           split(
             x = new_surveys_reactive(),
