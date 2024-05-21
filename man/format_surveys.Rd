@@ -9,7 +9,7 @@ format_surveys(surveys)
 }
 \arguments{
 \item{surveys}{(character) Data frame of surveys resulting from a call to
-qualtRics::all_surveys()}
+\code{qualtRics::all_surveys()}}
 }
 \value{
 A formatted data frame of Qualtrics survey data
@@ -26,7 +26,7 @@ metadata. Dates are formatted, and field names are cleaned (per janitor).
 Although not accessible through the web interface, querying survey data
 through the API can return multiple survey instances for a given year,
 semester, class, reliability combination. It is not clear the reason for
-more than once instance of the same survey, but the observation data are
+more than one instance of the same survey, but the observation data are
 different among them. Only the most recently modified survey among a
 duplicate set is returned.
 }
