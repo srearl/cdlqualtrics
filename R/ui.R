@@ -109,7 +109,11 @@ ui <- bslib::page_navbar(
     shiny::fluidRow(
 
       bslib::card(
-        echarts4r::echarts4rOutput("behaviour_view")
+        # echarts4r::echarts4rOutput("behaviour_view")
+        shiny::plotOutput(
+          outputId = "behaviour_view",
+          height   = "600px"
+        )
       ) # close card
 
     ), # close row

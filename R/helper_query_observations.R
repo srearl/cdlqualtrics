@@ -6,8 +6,6 @@
 #'
 query_class_observations <- function(survey_id) {
 
-  # survey_id <- as.integer(survey_id)
-
   parameterized_query <- glue::glue_sql("
     SELECT
       response_id,
@@ -24,10 +22,7 @@ query_class_observations <- function(survey_id) {
 
   class_observations <- run_interpolated_query(parameterized_query)
 
-  print(class_observations)
-  # return(class_observations)
+  # print(class_observations)
+  return(class_observations)
 
 }
-
-# class_students <- query_class_observations() |>
-#   dplyr::filter()

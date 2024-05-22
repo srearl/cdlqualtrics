@@ -14,11 +14,12 @@
 #'
 server <- function(input, output, session) {
 
-  # TEMPORARY during development only
+  # TEMPORARY DURING DEVELOPMENT ONLY
+
   session$onSessionEnded(function() {
     shiny::stopApp()
   })
-  
+
   # surveys --------------------------------------------------------------------
 
   surveys_data_reactive <- shiny::reactive({
@@ -85,7 +86,8 @@ server <- function(input, output, session) {
 
     return(observations)
 
-  }) |> shiny::bindEvent(input$surveys_data_view_rows_selected)
+  }) |>
+    shiny::bindEvent(input$surveys_data_view_rows_selected)
 
 
 
@@ -112,7 +114,8 @@ server <- function(input, output, session) {
 
   # behaviour ------------------------------------------------------------------
 
-  output$behaviour_view <- echarts4r::renderEcharts4r({
+  output$behaviour_view <- shiny::renderPlot({
+  # output$behaviour_view <- echarts4r::renderEcharts4r({
 
     # get the response ids of all data corresponding to the selected student by
     # filtering observation data on the name of that student (precisely!)
@@ -148,39 +151,50 @@ server <- function(input, output, session) {
         y  = cslqualtrics::behaviour_types,
         by = c("response" = "behaviour")
       ) |>
+      dplyr::mutate(
+        percent = dplyr::case_when(
+          is.na(percent) ~ 0,
+          TRUE ~ percent
+        )
+      ) |>
       dplyr::arrange(
         type,
         response
       ) |>
-      echarts4r::e_charts(x = response) |>
-      echarts4r::e_bar(
-        serie   = percent,
-        name    = "student behaviour",
-        legend  = FALSE,
-        colorBy = data
+      dplyr::mutate(
+        response = factor(
+          x      = response,
+          levels = behaviour_levels
+        )
       ) |>
-      echarts4r::e_tooltip(trigger = "axis") |>
-      echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 315)) |>
-      echarts4r::e_title(input$observation_students) |>
-      echarts4r::e_grid(bottom = "40%") |>
-      echarts4r::e_color(color = c(cslqualtrics::behaviour_types$color)) |>
-      echarts4r::e_y_axis(max = 60)
-
-    # student_observations_data |>
-    #   dplyr::filter(grepl("^q4$", question, ignore.case = TRUE)) |>
-    #   dplyr::group_by(response) |>
-    #   dplyr::summarise(
-    #     n        = dplyr::n(),
-    #     per_cent = round((n / student_behaviours_sum) * 100)
-    #   ) |>
-    #   dplyr::ungroup() |>
-    #   echarts4r::e_charts(response) |>
-    #   echarts4r::e_bar(per_cent, name = "behaviour", legend = FALSE) |>
-    #   echarts4r::e_tooltip(trigger = "axis") |>
-    #   echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 315)) |>
-    #   echarts4r::e_title(input$observation_students) |>
-    #   echarts4r::e_grid(bottom = "40%") |>
-    #   echarts4r::e_axis_labels(y = "per cent")
+      ggplot2::ggplot(
+        mapping = ggplot2::aes(
+          x    = response,
+          y    = percent,
+          fill = type
+        )
+      ) +
+    ggplot2::geom_bar(
+      stat        = "identity",
+      show.legend = TRUE
+    ) +
+    ggplot2::scale_fill_manual(
+      "behaviour type",
+      values = behaviour_type_colors,
+      drop   = FALSE
+    ) +
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(
+        angle = 315,
+        vjust = 1,
+        hjust = 0
+      ),
+      axis.title.x     = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      text             = ggplot2::element_text(size = 20)
+    ) +
+    ggplot2::ylim(0, 60) +
+    ggplot2::ggtitle(input$observation_students)
 
   })
 
@@ -429,7 +443,7 @@ server <- function(input, output, session) {
   })
 
   # shiny::observe(print(surveys_data_reactive()))
-  shiny::observe(print(surveys_data_reactive()[input$surveys_data_view_rows_selected, ]$id))
+  # shiny::observe(print(surveys_data_reactive()[input$surveys_data_view_rows_selected, ]$id))
   # shiny::observe(print(head(observations_data_reactive())))
   # shiny::observe(print(new_surveys_reactive() |> data.frame()))
   # shiny::observe(print(input$surveys_data_view_rows_selected))
