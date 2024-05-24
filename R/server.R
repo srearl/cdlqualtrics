@@ -115,7 +115,6 @@ server <- function(input, output, session) {
   # behaviour ------------------------------------------------------------------
 
   output$behaviour_view <- shiny::renderPlot({
-  # output$behaviour_view <- echarts4r::renderEcharts4r({
 
     # get the response ids of all data corresponding to the selected student by
     # filtering observation data on the name of that student (precisely!)
@@ -199,7 +198,62 @@ server <- function(input, output, session) {
   })
 
 
-  # update surveys ---------------------------------------------------------------
+  # behaviour by activity(location) --------------------------------------------
+
+  output$location_view <- shiny::renderPlot({
+
+    dplyr::inner_join(
+      observations_data_reactive() |>
+        dplyr::filter(grepl("q4$", question, ignore.case = TRUE)) |>
+        dplyr::select(
+          response_id,
+          behaviour = response
+        ),
+      observations_data_reactive() |>
+        dplyr::filter(grepl("q31$", question, ignore.case = TRUE)) |>
+        dplyr::select(
+          response_id,
+          activity = response
+        ),
+      by = "response_id"
+    ) |>
+      dplyr::count(behaviour, activity) |>
+      dplyr::left_join(
+        y = cslqualtrics::behaviour_types,
+        by = c("behaviour")
+      ) |>
+      dplyr::arrange(type) |>
+      dplyr::mutate(
+        behaviour = factor(
+          behaviour,
+          levels = behaviour_levels
+        )
+      ) |>
+      ggplot2::ggplot(
+        ggplot2::aes(
+          x    = activity,
+          y    = behaviour,
+          fill = n
+        )
+      ) +
+    ggplot2::geom_tile() +
+    ggplot2::scale_fill_distiller(
+      palette   = "YlOrRd",
+      direction = 1
+    ) +
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(
+        angle = 315,
+        vjust = 1,
+        hjust = 0
+      ),
+      text = ggplot2::element_text(size = 20)
+    )
+
+  })
+
+
+  # update surveys -------------------------------------------------------------
 
   new_surveys_reactive <- shiny::reactive({
 

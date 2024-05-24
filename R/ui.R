@@ -118,6 +118,41 @@ ui <- bslib::page_navbar(
 
     ), # close row
 
+    shiny::fluidRow(
+
+      bslib::accordion(
+        open = FALSE,
+
+        bslib::accordion_panel(
+          title = "behaviour by activity (location)",
+
+          bslib::card(
+            shiny::plotOutput(
+              outputId = "location_view",
+              height   = "600px"
+            )
+          )
+        ), # close accordion_panel
+
+        bslib::accordion_panel(
+          title = "another panel",
+
+          bslib::card(
+            "text in a card in an accordian in a row"
+          ),
+          bslib::card(
+            "1 text in a card in an accordian in a row",
+            "2 text in a card in an accordian in a row",
+            "3 text in a card in an accordian in a row",
+            "4 text in a card in an accordian in a row",
+            "5 text in a card in an accordian in a row"
+          )
+        ) # close accordion_panel
+
+      ) # close accordion
+
+    ), # close row - location by behaviour
+
     # br()
     # shiny::verbatimTextOutput(outputId = "mod_vals")
 
