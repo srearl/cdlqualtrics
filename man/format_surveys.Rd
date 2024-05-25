@@ -29,4 +29,9 @@ semester, class, reliability combination. It is not clear the reason for
 more than one instance of the same survey, but the observation data are
 different among them. Only the most recently modified survey among a
 duplicate set is returned.
+
+import dplyr
+import shiny
+importFrom stringr str_extract
+importFrom janitor clean_names
 }

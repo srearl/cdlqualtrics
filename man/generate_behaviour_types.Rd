@@ -9,6 +9,8 @@ generate_behaviour_types()
 \description{
 R code to construct the \code{behaviour_types} data object in
 the cslqualtrics package; included for reference (not exported).
+
+importFrom tibble tribble
 }
 \examples{
 \dontrun{

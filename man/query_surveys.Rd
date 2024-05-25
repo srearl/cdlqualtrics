@@ -2,17 +2,16 @@
 % Please edit documentation in R/helper_query_surveys.R
 \name{query_surveys}
 \alias{query_surveys}
-\title{query core bird survey data}
+\title{Query survey data from sqlite database}
 \usage{
 query_surveys()
 }
 \description{
-The functions included here ( query_surveys and query_survey )
-facilitate querying core bird survey data from the database. query_surveys
-supports querying the surveys table for project survey data whereas
-query_survey facilitates querying content of a single survey so that the
-details might be updated if needed.
-}
-\note{
-query project survey data
+The function included here (\code{query_surveys}) queries all
+survey data in the sqlite database. Additionally, the number of observation
+records associated with each survey is calculated and returned as part of
+the result.
+
+importFrom glue glue_sql
+importFrom DBI ANSI
 }

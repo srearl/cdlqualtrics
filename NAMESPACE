@@ -2,11 +2,10 @@
 
 export(format_for_excel)
 export(format_surveys)
-export(observation_expected_cols)
 export(pkgapp)
 export(query_class_observations)
 export(query_surveys)
 export(run_interpolated_query)
 export(server)
 export(ui)
-import(shiny)
+importFrom(shiny,shinyApp)

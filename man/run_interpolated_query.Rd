@@ -7,8 +7,12 @@
 run_interpolated_query(interpolatedQuery)
 }
 \description{
-The functions run_interpolated_query() and
-run_interpolated_execution() are (sub)helper functions that establish and
-close database connections to facilitate either a SQL query to return an
+The \code{functions run_interpolated_query} and
+\code{run_interpolated_execution} are (sub)helper functions that establish
+and close database connections to facilitate either a SQL query to return an
 objet or execute a statement.
+
+importFrom DBI dbGetQuery dbExecute
+importFrom shiny showNotification
+importFrom pool poolWithTransaction
 }

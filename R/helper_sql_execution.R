@@ -1,9 +1,13 @@
 #' @title helpers to facilitate sql executions
 #'
-#' @description The functions run_interpolated_query() and
-#'  run_interpolated_execution() are (sub)helper functions that establish and
-#'  close database connections to facilitate either a SQL query to return an
-#'  objet or execute a statement.
+#' @description The \code{functions run_interpolated_query} and
+#' \code{run_interpolated_execution} are (sub)helper functions that establish
+#' and close database connections to facilitate either a SQL query to return an
+#' objet or execute a statement.
+#'
+#' importFrom DBI dbGetQuery dbExecute
+#' importFrom shiny showNotification
+#' importFrom pool poolWithTransaction
 #'
 #' @export
 #'
@@ -20,28 +24,28 @@ run_interpolated_query <- function(interpolatedQuery) {
 
   }, warning = function(warn) {
 
-    showNotification(
-      ui          = paste("there is a warning:  ", warn),
-      duration    = NULL,
-      closeButton = TRUE,
-      type        = "warning"
-    )
+      shiny::showNotification(
+        ui          = paste("there is a warning:  ", warn),
+        duration    = NULL,
+        closeButton = TRUE,
+        type        = "warning"
+      )
 
-    print(paste("WARNING: ", warn))
+      print(paste("WARNING: ", warn))
 
-  }, error = function(err) {
+    }, error = function(err) {
 
-    showNotification(
-      ui          = paste("there was an error:  ", err),
-      duration    = NULL,
-      closeButton = TRUE,
-      type        = "error"
-    )
+      shiny::showNotification(
+        ui          = paste("there was an error:  ", err),
+        duration    = NULL,
+        closeButton = TRUE,
+        type        = "error"
+      )
 
-    print(paste("ERROR: ", err))
-    print("ROLLING BACK TRANSACTION")
+      print(paste("ERROR: ", err))
+      print("ROLLING BACK TRANSACTION")
 
-  }) # close try catch
+    }) # close try catch
 
 } # close run_interpolated_query
 
@@ -49,7 +53,7 @@ run_interpolated_query <- function(interpolatedQuery) {
 run_interpolated_execution <- function(
   interpolatedQuery,
   show_notification = FALSE
-  ) {
+) {
 
   tryCatch({
 
@@ -70,34 +74,34 @@ run_interpolated_execution <- function(
         duration    = NULL,
         closeButton = TRUE,
         type        = "message",
-        action      = a(href = "javascript:location.reload();", "reload the page")
+        action      = shiny::a(href = "javascript:location.reload();", "reload the page")
       )
 
     }
 
   }, warning = function(warn) {
 
-    showNotification(
-      ui          = paste("there is a warning:  ", warn),
-      duration    = NULL,
-      closeButton = TRUE,
-      type        = "warning"
-    )
+      shiny::showNotification(
+        ui          = paste("there is a warning:  ", warn),
+        duration    = NULL,
+        closeButton = TRUE,
+        type        = "warning"
+      )
 
-    print(paste("WARNING: ", warn))
+      print(paste("WARNING: ", warn))
 
-  }, error = function(err) {
+    }, error = function(err) {
 
-    showNotification(
-      ui          = paste("there was an error:  ", err),
-      duration    = NULL,
-      closeButton = TRUE,
-      type        = "error"
-    )
+      shiny::showNotification(
+        ui          = paste("there was an error:  ", err),
+        duration    = NULL,
+        closeButton = TRUE,
+        type        = "error"
+      )
 
-    print(paste("ERROR: ", err))
-    print("ROLLING BACK TRANSACTION")
+      print(paste("ERROR: ", err))
+      print("ROLLING BACK TRANSACTION")
 
-  }) # close try catch
+    }) # close try catch
 
 } # close run_interpolated_execution

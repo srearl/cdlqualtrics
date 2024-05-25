@@ -1,5 +1,14 @@
+#' @title UI component of the cslqualtrics Shiny application
+#'
+#' @description The UI component of the cslqualtrics Shiny application.
+#' Developed as a single UI that is not drawing upon modules.
+#'
+#' import shiny
+#' import bslib
+#' importFrom DT DTOutput
+#'
 #' @export
-
+#'
 ui <- bslib::page_navbar(
 
   title    = paste0("CSL: ", round(rnorm(1), 2)),
@@ -7,68 +16,8 @@ ui <- bslib::page_navbar(
   theme    = this_theme,
 
   bslib::nav_panel(
-    title = "utilities",
-    p("database administration"),
-
-    shiny::fluidRow(
-
-      bslib::card(
-
-        bslib::layout_sidebar(
-          fillable = TRUE,
-          sidebar  = bslib::sidebar(
-            position = "right",
-            open     = TRUE,
-
-            shiny::actionButton(
-              inputId = "authenticate",
-              label   = "authenticate",
-              class   = "btn-success"
-            ),
-
-            "SURVEYS",
-
-            bslib::input_task_button(
-              id    = "check_for_updates",
-              label = "check for updates"
-              # class   = "btn-success"
-            ),
-
-            bslib::input_task_button(
-              id    = "update_database",
-              label = "add updates"
-              # class   = "btn-success"
-            ),
-
-            "OBSERVATIONS"
-
-          ), # close sidebar
-          DT::DTOutput("new_surveys_view"),
-        ) # close layout_sidebar
-
-      ) # close card
-
-    ), # close top fluidRow
-
-  ),
-
-  bslib::nav_panel(
     title = "explore data",
-
-    # shiny::fluidRow(
-
-    #   shiny::column(
-    #     width = 2,
-    #     shiny::actionButton(
-    #       inputId = "query_database",
-    #       label   = "load data",
-    #       class   = "btn-success"
-    #     )
-    #   ),
-
-    #   shiny::column(width = 10)
-
-    # ), # close fluidRow
+    shiny::p("explore data"),
 
     shiny::br(),
 
@@ -108,20 +57,19 @@ ui <- bslib::page_navbar(
 
     shiny::fluidRow(
 
-      bslib::card(
-        # echarts4r::echarts4rOutput("behaviour_view")
-        shiny::plotOutput(
-          outputId = "behaviour_view",
-          height   = "600px"
-        )
-      ) # close card
-
-    ), # close row
-
-    shiny::fluidRow(
-
       bslib::accordion(
         open = FALSE,
+
+        bslib::accordion_panel(
+          title = "behaviour by student",
+
+          bslib::card(
+            shiny::plotOutput(
+              outputId = "behaviour_view",
+              height   = "600px"
+            )
+          ) # close card
+        ), # close accordion_panel
 
         bslib::accordion_panel(
           title = "behaviour by activity (location)",
@@ -135,17 +83,10 @@ ui <- bslib::page_navbar(
         ), # close accordion_panel
 
         bslib::accordion_panel(
-          title = "another panel",
+          title = "behaviour by TA",
 
           bslib::card(
-            "text in a card in an accordian in a row"
-          ),
-          bslib::card(
-            "1 text in a card in an accordian in a row",
-            "2 text in a card in an accordian in a row",
-            "3 text in a card in an accordian in a row",
-            "4 text in a card in an accordian in a row",
-            "5 text in a card in an accordian in a row"
+            shiny::tableOutput("ta_view")
           )
         ) # close accordion_panel
 
@@ -153,10 +94,56 @@ ui <- bslib::page_navbar(
 
     ), # close row - location by behaviour
 
+    # debugging
     # br()
     # shiny::verbatimTextOutput(outputId = "mod_vals")
 
-  ) # close nav_panel #2
+  ), # close nav_panel explore data
 
+  bslib::nav_panel(
+    title = "utilities",
+    shiny::p("database administration"),
+
+    shiny::fluidRow(
+
+      bslib::card(
+
+        bslib::layout_sidebar(
+          fillable = TRUE,
+          sidebar  = bslib::sidebar(
+            position = "right",
+            open     = TRUE,
+
+            shiny::actionButton(
+              inputId = "authenticate",
+              label   = "authenticate",
+              class   = "btn-success"
+            ),
+
+            "SURVEYS",
+
+            bslib::input_task_button(
+              id    = "check_for_updates",
+              label = "check for updates"
+              # class   = "btn-success"
+            ),
+
+            bslib::input_task_button(
+              id    = "update_database",
+              label = "add updates"
+              # class   = "btn-success"
+            ),
+
+            "OBSERVATIONS"
+
+          ), # close sidebar
+          DT::DTOutput("new_surveys_view"),
+        ) # close layout_sidebar
+
+      ) # close card
+
+    ) # close top fluidRow
+
+  ) # close nav_panel utilities
 
 ) # close page_navbar

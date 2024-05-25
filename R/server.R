@@ -1,14 +1,24 @@
+#' @title server component of the cslqualtrics Shiny application
 #'
-#'
-#'
-#'
-#'
+#' @description The server component of the cslqualtrics Shiny application.
+#' Developed as a single file that is not drawing upon modules.
 #'
 #' @note To facilitate search within the columns of a table but not globally
 #' (i.e., remove the search bar), we set the dom to 'tp'. However, this
 #' approach is deprecated (see: https://datatables.net/reference/option/dom)
 #' and will not be supported as of datatables v3. At the time this app was
 #' developed, the recommended approach was not available in Shiny.
+#'
+#' import shiny
+#' import dplyr
+#' import ggplot2
+#' import qualtRics
+#' import pool
+#' importFrom DT renderDT JS
+#' importFrom glue glue_sql
+#' importFrom DBI ANSI dbWriteTable
+#' importFrom purrr walk
+#' importFrom lobstr tree
 #'
 #' @export
 #'
@@ -28,7 +38,8 @@ server <- function(input, output, session) {
 
     return(surveys)
 
-  }) |> shiny::bindEvent(input$query_database)
+  }) |>
+    shiny::bindEvent(input$query_database)
 
 
   output$surveys_data_view <- DT::renderDT({
@@ -88,7 +99,6 @@ server <- function(input, output, session) {
 
   }) |>
     shiny::bindEvent(input$surveys_data_view_rows_selected)
-
 
 
   # students -------------------------------------------------------------------
@@ -218,7 +228,8 @@ server <- function(input, output, session) {
       by = "response_id"
     ) |>
       dplyr::count(behaviour, activity) |>
-      dplyr::left_join(
+      # full_join to ensure all behaviour types are plotted
+      dplyr::full_join(
         y = cslqualtrics::behaviour_types,
         by = c("behaviour")
       ) |>
@@ -228,6 +239,11 @@ server <- function(input, output, session) {
           behaviour,
           levels = behaviour_levels
         )
+      ) |>
+      # ensure all activity types are plotted
+      dplyr::full_join(
+        cslqualtrics::activity_types,
+        by = c("activity")
       ) |>
       ggplot2::ggplot(
         ggplot2::aes(
@@ -253,6 +269,59 @@ server <- function(input, output, session) {
   })
 
 
+  # behaviour by TA ------------------------------------------------------------
+
+  output$ta_view <- shiny::renderTable(
+    striped = TRUE,
+    hover   = TRUE,
+    border  = TRUE,
+    spacing = c("s"),
+    {
+
+      ta_behaviour <- dplyr::inner_join(
+        observations_data_reactive() |>
+          dplyr::filter(grepl("q4$", question, ignore.case = TRUE)) |>
+          dplyr::select(
+            response_id,
+            behaviour = response
+          ),
+        observations_data_reactive() |>
+          dplyr::filter(grepl("q1$", question, ignore.case = TRUE)) |>
+          # remove special character esp. colon for time
+          dplyr::mutate(response = gsub(":|@|#|'|\\.", "", response)) |>
+          dplyr::select(
+            response_id,
+            TA = response
+          ),
+        by = "response_id"
+      )
+
+      ta_total <- ta_behaviour |>
+        dplyr::group_by(TA) |>
+        dplyr::summarise(total = dplyr::n()) |>
+        dplyr::ungroup()
+
+      ta_behaviour <- ta_behaviour |>
+        dplyr::count(behaviour, TA) |>
+        tidyr::pivot_wider(
+          names_from  = behaviour,
+          values_from = n
+        ) |>
+        dplyr::select(
+          TA,
+          tidyselect::any_of(behaviour_levels)
+        ) |> 
+        dplyr::left_join(
+          ta_total,
+          by = c("TA")
+        ) |>
+        dplyr::arrange(TA)
+
+      return(ta_behaviour)
+
+    })
+
+
   # update surveys -------------------------------------------------------------
 
   new_surveys_reactive <- shiny::reactive({
@@ -265,7 +334,7 @@ server <- function(input, output, session) {
       "SELECT * FROM surveys ;",
       .con = DBI::ANSI()
     )
-    surveys_db  <- run_interpolated_query(surveys_all_query)
+    surveys_db <- run_interpolated_query(surveys_all_query)
 
     surveys_new <- dplyr::full_join(
       x = surveys_api,
@@ -320,18 +389,7 @@ server <- function(input, output, session) {
 
     if (!is.null(new_surveys_reactive())) {
 
-      new_surveys_reactive() # |>
-      # dplyr::select(
-      #   id,
-      #   name,
-      #   creation_date,
-      #   is_active,
-      #   semester,
-      #   year,
-      #   class,
-      #   reliability,
-      #   status
-      # )
+      new_surveys_reactive()
 
     }
 

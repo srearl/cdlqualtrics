@@ -2,10 +2,14 @@
 % Please edit documentation in R/helper_query_observations.R
 \name{query_class_observations}
 \alias{query_class_observations}
-\title{query a bird observation record}
+\title{Query observations associated with a survey}
 \usage{
 query_class_observations(survey_id)
 }
 \description{
-The function included here ( query_bird_observation ) ...
+Queries from the sqlite database all observations associated
+with an individual survey.
+
+importFrom glue glue_sql
+importFrom DBI ANSI
 }

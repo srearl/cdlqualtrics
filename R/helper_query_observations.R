@@ -1,6 +1,10 @@
-#' @title query a bird observation record
+#' @title Query observations associated with a survey
 #'
-#' @description The function included here ( query_bird_observation ) ...
+#' @description Queries from the sqlite database all observations associated
+#' with an individual survey.
+#'
+#' importFrom glue glue_sql
+#' importFrom DBI ANSI
 #'
 #' @export
 #'

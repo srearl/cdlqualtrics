@@ -1,16 +1,16 @@
+#' @title Tools to facilitate uploading to a database formatted observation
+#' data
 #'
+#' @description Tools and a workflow for fetching from Qualtrics, formatting,
+#' then uploading to an sqlite database observation data.
 #'
-#'
-#'
-#'
-#'
-#' @note To facilitate search within the columns of a table but not globally
-#' (i.e., remove the search bar), we set the dom to 'tp'. However, this
-#' approach is deprecated (see: https://datatables.net/reference/option/dom)
-#' and will not be supported as of datatables v3. At the time this app was
-#' developed, the recommended approach was not available in Shiny.
-#'
-#' @export
+#' import dplyr
+#' importFrom qualtRics fetch_survey
+#' importFrom janitor clean_names
+#' importFrom tidyselect everything starts_with
+#' importFrom DBI dbWriteTable
+#' importFrom purrr possibly
+#' importFrom tidyr pivot_longer matches
 #'
 observation_expected_cols <- c(
   "survey_id",
@@ -34,6 +34,11 @@ observation_expected_cols <- c(
   "question",
   "response"            
 )
+
+#'
+#'
+#'
+#'
 
 fetch_survey_data <- function(survey_id) {
 
@@ -91,7 +96,6 @@ fetch_survey_data <- function(survey_id) {
 
   }
 
-
   # wide to long
 
   single_survey_df <- single_survey_df |> 
@@ -126,10 +130,20 @@ fetch_survey_data <- function(survey_id) {
 
 }
 
+#'
+#'
+#'
+#'
+
 fetch_survey_data_possibly <- purrr::possibly(
   .f        = fetch_survey_data,
   otherwise = NULL
 )
+
+#'
+#'
+#'
+#'
 
 # split(
 #   x = surveys_most_recent,

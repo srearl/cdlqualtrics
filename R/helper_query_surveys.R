@@ -1,12 +1,14 @@
-#' @title query core bird survey data
+#' @title Query survey data from sqlite database
 #'
-#' @description The functions included here ( query_surveys and query_survey )
-#' facilitate querying core bird survey data from the database. query_surveys
-#' supports querying the surveys table for project survey data whereas
-#' query_survey facilitates querying content of a single survey so that the
-#' details might be updated if needed.
+#' @description The function included here (\code{query_surveys}) queries all
+#' survey data in the sqlite database. Additionally, the number of observation
+#' records associated with each survey is calculated and returned as part of
+#' the result.
 #'
-#' @note query project survey data
+#' @note consider an inner join
+#'
+#' importFrom glue glue_sql
+#' importFrom DBI ANSI
 #'
 #' @export
 #'
@@ -47,62 +49,3 @@ query_surveys <- function() {
   return(surveys_table)
 
 }
-
-#' @note query details for a single survey
-
-# query_survey <- function(survey) {
-
-#   base_query <- "
-#   SELECT
-#     id,
-#     name,
-#     semester,
-#     year,
-#     class,
-#     reliability,
-#     last_modified_date AS last_modified,
-#     creation_date AS created
-#   FROM
-#     surveys
-#   WHERE
-#     surveys.id = ?survey_id
-#   ;
-#   "
-
-#   parameterized_query <- DBI::sqlInterpolate(
-#     DBI::ANSI(),
-#     base_query,
-#     survey_id = survey
-#   )
-
-#   survey_table <- run_interpolated_query(parameterized_query)
-
-#   return(survey_table)
-
-# }
-
-#' @note query survey id and date ranges
-
-# query_survey_range <- function() {
-
-#   base_query <- "
-#   SELECT
-#     surveys.id,
-#     surveys.survey_date
-#   FROM core_birds.surveys
-#   ;
-#   "
-
-#   survey_ranges <- DBI::dbGetQuery(
-#     conn      = this_pool,
-#     statement = base_query
-#   )
-
-#   return(survey_ranges)
-
-# }
-
-# survey_ids_all <- query_survey_range()
-
-# survey_ids_recent <- survey_ids_all |>
-#   dplyr::filter(survey_date >= Sys.Date() - lubridate::years(2))

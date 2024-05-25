@@ -16,6 +16,11 @@
 #' different among them. Only the most recently modified survey among a
 #' duplicate set is returned.
 #'
+#' import dplyr
+#' import shiny
+#' importFrom stringr str_extract
+#' importFrom janitor clean_names
+#'
 #' @param surveys
 #' (character) Data frame of surveys resulting from a call to
 #' `qualtRics::all_surveys()`

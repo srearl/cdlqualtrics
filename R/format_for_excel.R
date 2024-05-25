@@ -35,7 +35,7 @@
 #' }
 #'
 #' @export
-
+#'
 format_for_excel <- function(
   qualtrics_file,
   class,
