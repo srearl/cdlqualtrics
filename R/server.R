@@ -17,7 +17,7 @@
 #' importFrom DT renderDT JS
 #' importFrom glue glue_sql
 #' importFrom DBI ANSI dbWriteTable
-#' importFrom purrr walk
+#' importFrom purrr walk possibly
 #' importFrom lobstr tree
 #'
 #' @export
@@ -29,6 +29,7 @@ server <- function(input, output, session) {
   session$onSessionEnded(function() {
     shiny::stopApp()
   })
+
 
   # surveys --------------------------------------------------------------------
 
@@ -329,7 +330,9 @@ server <- function(input, output, session) {
     surveys_api <- qualtRics::all_surveys()
     surveys_api <- format_surveys(surveys_api)
 
-    # here we query all surveys (i.e., not query_surveys())
+    # here we query all surveys as opposed to query_surveys() that only returns
+    # surveys for which there are corresponding observation records
+
     surveys_all_query <- glue::glue_sql(
       "SELECT * FROM surveys ;",
       .con = DBI::ANSI()
@@ -461,12 +464,12 @@ server <- function(input, output, session) {
 
       pool::poolWithTransaction(
         pool = this_pool,
-        func = function(conn) {
+        func = function(this_conn) {
 
           # add new surveys
 
           DBI::dbWriteTable(
-            conn      = this_pool,
+            conn      = this_conn,
             name      = "surveys",
             value     = new_surveys,
             overwrite = FALSE,
@@ -488,7 +491,7 @@ server <- function(input, output, session) {
 
           # update time of updated surveys
 
-          glue::glue_sql("
+          update_last_modified <- glue::glue_sql("
             UPDATE surveys
             SET last_modified = { updated_surveys$last_modified }
             WHERE id = { updated_surveys$id }
@@ -497,23 +500,35 @@ server <- function(input, output, session) {
             .con = DBI::ANSI()
           )
 
+          purrr::walk(update_last_modified, ~ DBI::dbExecute(statement = .x, conn = this_conn))
+
           # delete observations of updated surveys
 
-          glue::glue_sql("
+          delete_outdated_obs <- glue::glue_sql("
             DELETE from observations
-            WHERE id = { updated_surveys$id }
+            WHERE survey_id IN ({ updated_surveys$id* })
             ;
             ",
             .con = DBI::ANSI()
           )
 
+          DBI::dbExecute(
+            conn      = this_conn,
+            statement = delete_outdated_obs
+          )
+
           # add observations for new and updated surveys
+
+          fetch_survey_data_possibly <- purrr::possibly(
+            .f        = cslqualtrics::fetch_survey_data,
+            otherwise = NULL
+          )
 
           split(
             x = new_surveys_reactive(),
             f = new_surveys_reactive()$id
           ) |>
-            {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id))}()
+            {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, connection = this_conn))}()
 
         } # close poolWithTransaction func
       ) # close poolWithTransaction

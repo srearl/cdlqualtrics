@@ -57,3 +57,28 @@ behaviour_levels <- c(
   "Sharing",
   "Turn taking"
 )
+
+# qualtrics fetch survey expected columns after pivot --------------------------
+
+observation_expected_cols <- c(
+  "survey_id",
+  "start_date",
+  "end_date",
+  "status",
+  "ip_address",
+  "progress",
+  "duration_in_seconds",
+  "finished",
+  "recorded_date",
+  "response_id",
+  "recipient_last_name",
+  "recipient_first_name",
+  "recipient_email",
+  "external_reference",
+  "location_latitude",
+  "location_longitude",
+  "distribution_channel",
+  "user_language",
+  "question",
+  "response"            
+)

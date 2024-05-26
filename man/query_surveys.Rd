@@ -11,6 +11,9 @@ The function included here (\code{query_surveys}) queries all
 survey data in the sqlite database. Additionally, the number of observation
 records associated with each survey is calculated and returned as part of
 the result.
+}
+\note{
+consider an inner join
 
 importFrom glue glue_sql
 importFrom DBI ANSI

@@ -5,7 +5,7 @@
 \alias{behaviour_types}
 \title{Qualtrics behaviour types}
 \format{
-A tibble with 22 rows and 2 variables:
+A tibble with 22 rows and 3 variables:
 \describe{
 \item{type}{behaviour type}
 \item{behaviour}{observed behaviour}
@@ -19,13 +19,16 @@ Anne Kupfer personal communication
 behaviour_types
 }
 \description{
-Broad catgories to which observed behaviours are assigned.
+Broad categories to which observed behaviours are assigned.
 }
 \note{
 Construction of the data is documented in helper_behaviour_types.R.
 
-Spelling and grammatical errors are reflected in source Qualitrics survey data and not corrected.
+Spelling and grammatical errors are reflected in source Qualitrics
+survey data and not corrected.
 
-The categories presented differ from the categories detailed in the Qualtrics survey data. For example, the category titled \verb{Inappropriate Behaviors} is recorded as a mix of \code{Self-Regulation} and \code{Antisocial} in Q3 of the Qualtrics survey.
+The categories presented differ from the categories detailed in the
+Qualtrics survey data. For example, the category titled \verb{Inappropriate Behaviors} is recorded as a mix of \code{Self-Regulation} and \code{Antisocial} in Q3
+of the Qualtrics survey.
 }
 \keyword{datasets}

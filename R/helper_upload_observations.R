@@ -9,38 +9,23 @@
 #' importFrom janitor clean_names
 #' importFrom tidyselect everything starts_with
 #' importFrom DBI dbWriteTable
-#' importFrom purrr possibly
 #' importFrom tidyr pivot_longer matches
 #'
-observation_expected_cols <- c(
-  "survey_id",
-  "start_date",
-  "end_date",
-  "status",
-  "ip_address",
-  "progress",
-  "duration_in_seconds",
-  "finished",
-  "recorded_date",
-  "response_id",
-  "recipient_last_name",
-  "recipient_first_name",
-  "recipient_email",
-  "external_reference",
-  "location_latitude",
-  "location_longitude",
-  "distribution_channel",
-  "user_language",
-  "question",
-  "response"            
-)
-
+#' @param survey_id
+#' (character) id of Qualtrics survey for which to query observations
+#' @param upload
+#' (logical) logical indicating whether to upload formatted observation data to
+#' the database (TRUE, default) or return them in the form of a tibble
+#' @param connection
+#' (character) database connection
 #'
+#' @export
 #'
-#'
-#'
-
-fetch_survey_data <- function(survey_id) {
+fetch_survey_data <- function(
+  survey_id,
+  upload = TRUE,
+  connection
+) {
 
   # query qualtrics API
 
@@ -115,38 +100,23 @@ fetch_survey_data <- function(survey_id) {
 
   } else {
 
-    # return(single_survey_df)
+    if (upload == FALSE) {
 
-    DBI::dbWriteTable(
-      conn      = csl_obs_db,
-      name      = "observations",
-      value     = single_survey_df,
-      overwrite = FALSE,
-      append    = TRUE,
-      row.names = FALSE
-    )
+      return(single_survey_df)
+
+    } else {
+
+      DBI::dbWriteTable(
+        conn      = connection,
+        name      = "observations",
+        value     = single_survey_df,
+        overwrite = FALSE,
+        append    = TRUE,
+        row.names = FALSE
+      )
+
+    }
 
   }
 
 }
-
-#'
-#'
-#'
-#'
-
-fetch_survey_data_possibly <- purrr::possibly(
-  .f        = fetch_survey_data,
-  otherwise = NULL
-)
-
-#'
-#'
-#'
-#'
-
-# split(
-#   x = surveys_most_recent,
-#   f = surveys_most_recent$id
-# ) |> 
-#   {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id))}()

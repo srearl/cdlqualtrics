@@ -25,6 +25,6 @@ import pool
 importFrom DT renderDT JS
 importFrom glue glue_sql
 importFrom DBI ANSI dbWriteTable
-importFrom purrr walk
+importFrom purrr walk possibly
 importFrom lobstr tree
 }
