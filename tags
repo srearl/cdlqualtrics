@@ -11,6 +11,14 @@
 !_TAG_FIELD_DESCRIPTION!R	constructor	/function used for making value assigned to the nameattr tag/
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_KIND_DESCRIPTION!Markdown	S,subsection	/level 2 sections/
+!_TAG_KIND_DESCRIPTION!Markdown	T,l4subsection	/level 4 sections/
+!_TAG_KIND_DESCRIPTION!Markdown	c,chapter	/chapters/
+!_TAG_KIND_DESCRIPTION!Markdown	h,hashtag	/hashtags/
+!_TAG_KIND_DESCRIPTION!Markdown	n,footnote	/footnotes/
+!_TAG_KIND_DESCRIPTION!Markdown	s,section	/sections/
+!_TAG_KIND_DESCRIPTION!Markdown	t,subsubsection	/level 3 sections/
+!_TAG_KIND_DESCRIPTION!Markdown	u,l5subsection	/level 5 sections/
 !_TAG_KIND_DESCRIPTION!R	L,list	/lists explicitly created with `list()'/
 !_TAG_KIND_DESCRIPTION!R	c,vector	/vectors explicitly created with `c()'/
 !_TAG_KIND_DESCRIPTION!R	d,dataframe	/data frame explicitly created with `data.frame()'/
@@ -20,13 +28,43 @@
 !_TAG_KIND_DESCRIPTION!R	n,nameattr	/names attribtes in vectors, lists, or dataframes/
 !_TAG_KIND_DESCRIPTION!R	s,source	/sources/
 !_TAG_KIND_DESCRIPTION!R	v,functionVar	/function variables having values other than function()/
+!_TAG_KIND_DESCRIPTION!SQL	C,ccflag	/PLSQL_CCFLAGS/
+!_TAG_KIND_DESCRIPTION!SQL	D,domain	/domains/
+!_TAG_KIND_DESCRIPTION!SQL	E,field	/record fields/
+!_TAG_KIND_DESCRIPTION!SQL	L,label	/block label/
+!_TAG_KIND_DESCRIPTION!SQL	P,package	/packages/
+!_TAG_KIND_DESCRIPTION!SQL	R,service	/services/
+!_TAG_KIND_DESCRIPTION!SQL	S,schema	/schemas/
+!_TAG_KIND_DESCRIPTION!SQL	T,trigger	/triggers/
+!_TAG_KIND_DESCRIPTION!SQL	U,publication	/publications/
+!_TAG_KIND_DESCRIPTION!SQL	V,view	/views/
+!_TAG_KIND_DESCRIPTION!SQL	b,database	/database/
+!_TAG_KIND_DESCRIPTION!SQL	c,cursor	/cursors/
+!_TAG_KIND_DESCRIPTION!SQL	e,event	/events/
+!_TAG_KIND_DESCRIPTION!SQL	f,function	/functions/
+!_TAG_KIND_DESCRIPTION!SQL	i,index	/indexes/
+!_TAG_KIND_DESCRIPTION!SQL	n,synonym	/synonyms/
+!_TAG_KIND_DESCRIPTION!SQL	p,procedure	/procedures/
+!_TAG_KIND_DESCRIPTION!SQL	s,subtype	/subtypes/
+!_TAG_KIND_DESCRIPTION!SQL	t,table	/tables/
+!_TAG_KIND_DESCRIPTION!SQL	v,variable	/variables/
+!_TAG_KIND_DESCRIPTION!SQL	x,mltable	/MobiLink Table Scripts/
+!_TAG_KIND_DESCRIPTION!SQL	y,mlconn	/MobiLink Conn Scripts/
+!_TAG_KIND_DESCRIPTION!SQL	z,mlprop	/MobiLink Properties/
+!_TAG_KIND_DESCRIPTION!Sh	a,alias	/aliases/
+!_TAG_KIND_DESCRIPTION!Sh	f,function	/functions/
+!_TAG_KIND_DESCRIPTION!Sh	h,heredoc	/label for here document/
+!_TAG_KIND_DESCRIPTION!Sh	s,script	/script files/
 !_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
 !_TAG_OUTPUT_VERSION	0.0	/current.age/
+!_TAG_PARSER_VERSION!Markdown	1.1	/current.age/
 !_TAG_PARSER_VERSION!R	0.0	/current.age/
+!_TAG_PARSER_VERSION!SQL	0.0	/current.age/
+!_TAG_PARSER_VERSION!Sh	0.0	/current.age/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
-!_TAG_PROC_CWD	/home/srearl/localRepos/cslqualtrics/R/	//
+!_TAG_PROC_CWD	/home/srearl/localRepos/cslqualtrics/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
@@ -34,224 +72,326 @@
 !_TAG_ROLE_DESCRIPTION!R!library	library	/library attached by library function/
 !_TAG_ROLE_DESCRIPTION!R!library	require	/library attached by require function/
 !_TAG_ROLE_DESCRIPTION!R!source	source	/source loaded by source fucntion/
-"last_modified"	helper_format_surveys.R	/^        "last_modified" = "latest"$/;"	n	vector:format_surveys.by
-.con	helper_query_observations.R	/^    .con = DBI::ANSI()$/;"	v	function:query_class_observations
-.con	helper_query_surveys.R	/^    .con = DBI::ANSI()$/;"	v	function:query_surveys
-.con	server.R	/^            .con = DBI::ANSI()$/;"	v	function:server.func
-.con	server.R	/^      .con = DBI::ANSI()$/;"	v	function:server
-.f	helper_upload_observations.R	/^  .f        = fetch_survey_data,$/;"	g
-.x	server.R	/^            {\\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id))}()$/;"	v	function:server.func
-action	helper_sql_execution.R	/^        action      = a(href = "javascript:location.reload();", "reload the page")$/;"	v	function:run_interpolated_execution
-all.names	server.R	/^        all.names = TRUE$/;"	v	function:server
-anonFunc0dd293960100	global.R	/^shiny::onStop(function() {$/;"	f
-anonFunc0e7c93dc0a00	server.R	/^    }, warning = function(warn) {$/;"	f	function:server
-anonFunc7b4a58670100	helper_sql_execution.R	/^  }, warning = function(warn) {$/;"	f	function:run_interpolated_query
-anonFunc7b4a58670200	helper_sql_execution.R	/^  }, warning = function(warn) {$/;"	f	function:run_interpolated_execution
-anonList0e7c93dc0107	server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
-anonList0e7c93dc0207	server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
-anonList0e7c93dc0307	server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
-anonList0e7c93dc0407	server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
-anonList0e7c93dc0607	server.R	/^        list($/;"	L	list:columnDefs
-anonList0e7c93dc0707	server.R	/^        list($/;"	L	list:columnDefs
-anonList0e7c93dc0807	server.R	/^        list($/;"	L	list:columnDefs
-anonList0e7c93dc0907	server.R	/^        list($/;"	L	list:columnDefs
-append	helper_upload_observations.R	/^      append    = TRUE,$/;"	v	function:fetch_survey_data
-append	server.R	/^            append    = TRUE,$/;"	v	function:server.func
-autoWidth	server.R	/^      autoWidth     = FALSE,$/;"	n	list:server.options
-autoWidth	server.R	/^      autoWidth     = TRUE,$/;"	g
-axisLabel	server.R	/^      echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 315)) |>$/;"	L	function:server
-bFilter	server.R	/^      bFilter       = 1,$/;"	g
-bFilter	server.R	/^      bFilter       = 1,$/;"	n	list:server.options
-bLengthChange	server.R	/^      bLengthChange = FALSE,$/;"	g
-bLengthChange	server.R	/^      bLengthChange = FALSE,$/;"	n	list:server.options
-bPaginate	server.R	/^      bPaginate     = FALSE,$/;"	g
-bPaginate	server.R	/^      bPaginate     = FALSE,$/;"	n	list:server.options
-bSort	server.R	/^      bSort         = TRUE,$/;"	g
-bSort	server.R	/^      bSort         = TRUE,$/;"	n	list:server.options
-base_query	helper_query_surveys.R	/^  base_query <- glue::glue_sql("$/;"	v	function:query_surveys
-bootswatch	global.R	/^  bootswatch = "zephyr"$/;"	g
-bottom	server.R	/^      echarts4r::e_grid(bottom = "40%") |>$/;"	v	function:server
-by	helper_format_surveys.R	/^      by = c($/;"	c	function:format_surveys
-by	server.R	/^      by = c("id")$/;"	c	function:server
-choices	server.R	/^      choices = students$/;"	v	function:server
-choices	ui.R	/^              choices   = "",$/;"	g
-class	helper_format_surveys.R	/^      class = dplyr::case_when($/;"	v	function:format_surveys
-class	server.R	/^    class      = c("compact"),$/;"	c	function:server
-class	ui.R	/^              class   = "btn-success"$/;"	g
-class_observations	helper_query_observations.R	/^  class_observations <- run_interpolated_query(parameterized_query)$/;"	v	function:query_class_observations
-closeButton	helper_sql_execution.R	/^        closeButton = TRUE,$/;"	v	function:run_interpolated_execution
-closeButton	server.R	/^          closeButton = TRUE,$/;"	v	function:server.anonFunc0e7c93dc0a00
-closeButton	server.R	/^          closeButton = TRUE,$/;"	v	function:server.anonFunc0e7c93dc0a00.error
-closeButton	server.R	/^        closeButton = TRUE,$/;"	v	function:server
-col.names	server.R	/^            col.names = c($/;"	c	function:server.func
-cols	helper_upload_observations.R	/^      cols      = tidyr::matches("^Q[0-9]+"),$/;"	v	function:fetch_survey_data
-columnDefs	server.R	/^      columnDefs    = list($/;"	L
-columnDefs	server.R	/^      columnDefs    = list($/;"	n	list:server.options	constructor:list
-conn	global.R	/^  conn      = this_pool,$/;"	g
-conn	helper_sql_execution.R	/^      conn      = this_pool,$/;"	v	function:run_interpolated_query
-conn	helper_upload_observations.R	/^      conn      = csl_obs_db,$/;"	v	function:fetch_survey_data
-creationDate	helper_format_surveys.R	/^      creationDate = as.POSIXct($/;"	v	function:format_surveys
-creation_date	helper_format_surveys.R	/^      creation_date = as.character(creation_date)$/;"	v	function:format_surveys
-dbname	global.R	/^  dbname   = "\/tmp\/cslobsdb.db",$/;"	g
-dom	server.R	/^      dom           = "tp", # deprecated in datatables (see note)$/;"	g
-dom	server.R	/^      dom           = "tp", # deprecated in datatables (see note)$/;"	n	list:server.options
-drv	global.R	/^  drv      = RSQLite::SQLite(),$/;"	g
-duration	helper_sql_execution.R	/^        duration    = NULL,$/;"	v	function:run_interpolated_execution
-duration	server.R	/^          duration    = NULL,$/;"	v	function:server.anonFunc0e7c93dc0a00
-duration	server.R	/^          duration    = NULL,$/;"	v	function:server.anonFunc0e7c93dc0a00.error
-duration	server.R	/^        duration    = 5,$/;"	v	function:server
-duration_in_seconds	helper_upload_observations.R	/^      duration_in_seconds = as.integer(duration_in_seconds),$/;"	v	function:fetch_survey_data
-end_date	helper_upload_observations.R	/^      end_date            = as.character(end_date),$/;"	v	function:fetch_survey_data
-error	helper_sql_execution.R	/^  }, error = function(err) {$/;"	f	function:run_interpolated_execution.anonFunc7b4a58670200
-error	helper_sql_execution.R	/^  }, error = function(err) {$/;"	f	function:run_interpolated_query.anonFunc7b4a58670100
-error	server.R	/^      }, error = function(err) {$/;"	f	function:server.anonFunc0e7c93dc0a00
-escape	server.R	/^    escape     = FALSE,$/;"	v	function:server
-extensions	server.R	/^    extensions = c("FixedHeader"),$/;"	c	function:server
-fetch_survey_data	helper_upload_observations.R	/^fetch_survey_data <- function(survey_id) {$/;"	f
-fetch_survey_data_possibly	helper_upload_observations.R	/^fetch_survey_data_possibly <- purrr::possibly($/;"	g
-fillable	ui.R	/^          fillable = TRUE,$/;"	g
-filter	server.R	/^    filter     = "top",$/;"	v	function:server
-finished	helper_upload_observations.R	/^      finished            = as.logical(finished),$/;"	v	function:fetch_survey_data
-fixedHeader	server.R	/^      fixedHeader   = FALSE,$/;"	g
-fixedHeader	server.R	/^      fixedHeader   = FALSE,$/;"	n	list:server.options
-format_for_excel	format_for_excel.R	/^format_for_excel <- function($/;"	f
-format_surveys	helper_format_surveys.R	/^format_surveys <- function(surveys) {$/;"	f
-from_file	format_for_excel.R	/^  from_file <- read.csv($/;"	v	function:format_for_excel
-func	helper_sql_execution.R	/^      func = function(conn) {$/;"	f	function:run_interpolated_execution
-func	server.R	/^        func = function(conn) {$/;"	f	function:server
-id	ui.R	/^              id    = "check_for_updates",$/;"	g
-id	ui.R	/^              id    = "update_database",$/;"	g
-inputId	server.R	/^      inputId = "observation_students",$/;"	v	function:server
-inputId	ui.R	/^              inputId   = "observation_students",$/;"	g
-inputId	ui.R	/^              inputId = "authenticate",$/;"	g
-inputId	ui.R	/^              inputId = "query_database",$/;"	g
-interval	server.R	/^      echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 315)) |>$/;"	n	list:server.axisLabel
-label	ui.R	/^              label     = "students",$/;"	g
-label	ui.R	/^              label   = "authenticate",$/;"	g
-label	ui.R	/^              label   = "load data",$/;"	g
-label	ui.R	/^              label = "add updates"$/;"	g
-label	ui.R	/^              label = "check for updates"$/;"	g
-lastModified	helper_format_surveys.R	/^      lastModified = as.POSIXct($/;"	v	function:format_surveys
-last_modified	helper_format_surveys.R	/^      last_modified = as.character(last_modified),$/;"	v	function:format_surveys
-last_modified_db	server.R	/^        dplyr::rename(last_modified_db = last_modified),$/;"	v	function:server
-latest	helper_format_surveys.R	/^    dplyr::summarise(latest = max(last_modified))$/;"	v	function:format_surveys
-legend	server.R	/^      echarts4r::e_bar(per_cent, name = "behaviour", legend = FALSE) |>$/;"	v	function:server
-main_from_global	global.R	/^main_from_global <- "hi from global"$/;"	g
-most_recent	helper_format_surveys.R	/^  most_recent <- surveys_filtered |>$/;"	v	function:format_surveys
-multiple	ui.R	/^              multiple  = FALSE,$/;"	g
-n	server.R	/^        n        = dplyr::n(),$/;"	v	function:server
-name	helper_upload_observations.R	/^      name      = "observations",$/;"	v	function:fetch_survey_data
-name	server.R	/^            name      = "surveys",$/;"	v	function:server.func
-name	server.R	/^      echarts4r::e_bar(per_cent, name = "behaviour", legend = FALSE) |>$/;"	v	function:server
-names_to	helper_upload_observations.R	/^      names_to  = "question",$/;"	v	function:fetch_survey_data
-new_or_updated	server.R	/^    new_or_updated <- dplyr::bind_rows($/;"	v	function:server
-new_surveys	server.R	/^    new_surveys <- new_surveys_reactive() |>$/;"	v	function:server
-new_surveys_reactive	server.R	/^  new_surveys_reactive <- shiny::reactive({$/;"	v	function:server
-observation_expected_cols	helper_upload_observations.R	/^observation_expected_cols <- c($/;"	c
-observation_surveys	helper_format_surveys.R	/^  observation_surveys <- surveys[grepl("sheet", surveys$name, ignore.case = TRUE), ]$/;"	v	function:format_surveys
-observations	server.R	/^    observations <- query_class_observations(survey)$/;"	v	function:server
-observations_data_reactive	server.R	/^  observations_data_reactive <- shiny::reactive({$/;"	v	function:server
-open	ui.R	/^            open     = TRUE,$/;"	g
-options	server.R	/^    options    = list($/;"	L	function:server
-otherwise	helper_upload_observations.R	/^  otherwise = NULL$/;"	g
-overwrite	helper_upload_observations.R	/^      overwrite = FALSE,$/;"	v	function:fetch_survey_data
-overwrite	server.R	/^            overwrite = FALSE,$/;"	v	function:server.func
-pageLength	server.R	/^      pageLength    = 10,$/;"	g
-pageLength	server.R	/^      pageLength    = 10,$/;"	n	list:server.options
-parameterized_query	helper_query_observations.R	/^  parameterized_query <- glue::glue_sql("$/;"	v	function:query_class_observations
-per_cent	server.R	/^        per_cent = round((n \/ student_behaviours_sum) * 100)$/;"	v	function:server
-pkgapp	pkgapp.R	/^pkgapp <- function(options = list(port = 8001)) {$/;"	f
-plugins	server.R	/^    plugins    = c("ellipsis"),$/;"	c	function:server
-pool	helper_sql_execution.R	/^      pool = this_pool,$/;"	v	function:run_interpolated_execution
-pool	server.R	/^        pool = this_pool,$/;"	v	function:server
-position	ui.R	/^            position = "right",$/;"	g
-position	ui.R	/^  position = c("static-top"),$/;"	c
-progress	helper_upload_observations.R	/^      progress            = as.integer(progress),$/;"	v	function:fetch_survey_data
-queryResult	helper_sql_execution.R	/^    queryResult <- DBI::dbGetQuery($/;"	v	function:run_interpolated_query
-query_class_observations	helper_query_observations.R	/^query_class_observations <- function(survey_id) {$/;"	f
-query_surveys	helper_query_surveys.R	/^query_surveys <- function() {$/;"	f
-recorded_date	helper_upload_observations.R	/^      recorded_date       = as.character(recorded_date),$/;"	v	function:fetch_survey_data
-reliability	helper_format_surveys.R	/^      reliability = dplyr::case_when($/;"	v	function:format_surveys
-render	server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(10)")$/;"	n	list:columnDefs.anonList0e7c93dc0707
-render	server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(10)")$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0207
-render	server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(50)")$/;"	n	list:columnDefs.anonList0e7c93dc0807
-render	server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(50)")$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0307
-response_x_child	format_for_excel.R	/^  response_x_child <- reshape($/;"	v	function:format_for_excel
-rotate	server.R	/^      echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 315)) |>$/;"	n	list:server.axisLabel
-row.names	helper_upload_observations.R	/^      row.names = FALSE$/;"	v	function:fetch_survey_data
-row.names	server.R	/^            row.names = FALSE,$/;"	v	function:server.func
-rownames	server.R	/^    rownames   = FALSE,$/;"	v	function:server
-run_interpolated_execution	helper_sql_execution.R	/^run_interpolated_execution <- function($/;"	f
-run_interpolated_query	helper_sql_execution.R	/^run_interpolated_query <- function(interpolatedQuery) {$/;"	f
-scrollX	server.R	/^      scrollX       = TRUE,$/;"	g
-scrollX	server.R	/^      scrollX       = TRUE,$/;"	n	list:server.options
-searchable	server.R	/^          searchable = FALSE$/;"	n	list:columnDefs.anonList0e7c93dc0907
-searchable	server.R	/^          searchable = FALSE$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0407
-searching	server.R	/^      searching     = TRUE,$/;"	g
-searching	server.R	/^      searching     = TRUE,$/;"	n	list:server.options
-selection	server.R	/^    selection  = "single",$/;"	v	function:server
-selectize	ui.R	/^              selectize = FALSE$/;"	g
-semester	helper_format_surveys.R	/^      semester = dplyr::case_when($/;"	v	function:format_surveys
-server	pkgapp.R	/^    server  = server,$/;"	v	function:pkgapp
-server	server.R	/^server <- function(input, output, session) {$/;"	f
-shutdown	global.R	/^  shutdown = TRUE$/;"	g
-sidebar	ui.R	/^          sidebar  = bslib::sidebar($/;"	g
-single_survey_df	helper_upload_observations.R	/^    single_survey_df <- qualtRics::fetch_survey($/;"	v	function:fetch_survey_data
-source_db	server.R	/^        dplyr::mutate(source_db = 1),$/;"	v	function:server
-start_date	helper_upload_observations.R	/^      start_date          = as.character(start_date),$/;"	v	function:fetch_survey_data
-statement	global.R	/^  statement = "PRAGMA foreign_keys = ON ;"$/;"	g
-statement	helper_sql_execution.R	/^      statement = interpolatedQuery$/;"	v	function:run_interpolated_query
-status	server.R	/^      dplyr::mutate(status = "new") |>$/;"	v	function:server
-student_behaviours_sum	server.R	/^    student_behaviours_sum <- student_observations_data |>$/;"	v	function:server
-student_observations_data	server.R	/^    student_observations_data <- observations_data_reactive()[$/;"	v	function:server
-student_responses_ids	server.R	/^    student_responses_ids <- observations_data_reactive()[$/;"	v	function:server
-students	server.R	/^    students <- observations_data_reactive() |>$/;"	v	function:server
-suffix	server.R	/^      suffix = c("_api", "_db")$/;"	c	function:server
-survey	server.R	/^    survey <- surveys_data_reactive()[input$surveys_data_view_rows_selected, ]$id$/;"	v	function:server
-surveyID	helper_upload_observations.R	/^      surveyID = survey_id,$/;"	v	function:fetch_survey_data
-surveys	server.R	/^    surveys <- query_surveys()$/;"	v	function:server
-surveys_all_query	server.R	/^    surveys_all_query <- glue::glue_sql($/;"	v	function:server
-surveys_api	server.R	/^    surveys_api <- qualtRics::all_surveys()$/;"	v	function:server
-surveys_data_reactive	server.R	/^  surveys_data_reactive <- shiny::reactive({$/;"	v	function:server
-surveys_db	server.R	/^    surveys_db  <- run_interpolated_query(surveys_all_query)$/;"	v	function:server
-surveys_filtered	helper_format_surveys.R	/^  surveys_filtered <- observation_surveys |> $/;"	v	function:format_surveys
-surveys_most_recent	helper_format_surveys.R	/^  surveys_most_recent <- surveys_filtered |>$/;"	v	function:format_surveys
-surveys_new	server.R	/^    surveys_new <- dplyr::full_join($/;"	v	function:server
-surveys_table	helper_query_surveys.R	/^  surveys_table <- run_interpolated_query(base_query)$/;"	v	function:query_surveys
-surveys_updated	server.R	/^    surveys_updated <- dplyr::inner_join($/;"	v	function:server
-targets	server.R	/^          targets    = c(0),$/;"	n	list:columnDefs.anonList0e7c93dc0907	constructor:c
-targets	server.R	/^          targets    = c(0, 6, 7, 8),$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0407	constructor:c
-targets	server.R	/^          targets = c(0),$/;"	n	list:columnDefs.anonList0e7c93dc0707	constructor:c
-targets	server.R	/^          targets = c(0),$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0207	constructor:c
-targets	server.R	/^          targets = c(1)$/;"	n	list:columnDefs.anonList0e7c93dc0607	constructor:c
-targets	server.R	/^          targets = c(1)$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0107	constructor:c
-targets	server.R	/^          targets = c(1),$/;"	n	list:columnDefs.anonList0e7c93dc0807	constructor:c
-targets	server.R	/^          targets = c(1),$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0307	constructor:c
-theme	ui.R	/^  theme    = this_theme,$/;"	g
-this_pool	global.R	/^this_pool <- pool::dbPool($/;"	g
-this_theme	global.R	/^this_theme <- bslib::bs_theme($/;"	g
-title	ui.R	/^    title = "explore data",$/;"	g
-title	ui.R	/^    title = "utilities",$/;"	g
-title	ui.R	/^  title    = paste0("CSL: ", round(rnorm(1), 2)),$/;"	g
-trigger	server.R	/^      echarts4r::e_tooltip(trigger = "axis") |>$/;"	v	function:server
-type	helper_sql_execution.R	/^        type        = "message",$/;"	v	function:run_interpolated_execution
-type	server.R	/^          type        = "error"$/;"	v	function:server.anonFunc0e7c93dc0a00.error
-type	server.R	/^          type        = "warning"$/;"	v	function:server.anonFunc0e7c93dc0a00
-type	server.R	/^        type        = "message"$/;"	v	function:server
-ui	helper_sql_execution.R	/^        ui          = "successfully uploaded",$/;"	v	function:run_interpolated_execution
-ui	pkgapp.R	/^    ui      = ui,$/;"	v	function:pkgapp
-ui	server.R	/^          ui          = paste("there is a warning:  ", warn),$/;"	v	function:server.anonFunc0e7c93dc0a00
-ui	server.R	/^          ui          = paste("there was an error:  ", err),$/;"	v	function:server.anonFunc0e7c93dc0a00.error
-ui	server.R	/^        ui          = "database is up to date",$/;"	v	function:server
-ui	ui.R	/^ui <- bslib::page_navbar($/;"	g
-updated_surveys	server.R	/^    updated_surveys <- new_surveys_reactive() |>$/;"	v	function:server
-value	helper_upload_observations.R	/^      value     = single_survey_df,$/;"	v	function:fetch_survey_data
-value	server.R	/^            value     = new_surveys,$/;"	v	function:server.func
-values_to	helper_upload_observations.R	/^      values_to = "response"$/;"	v	function:fetch_survey_data
-verbose	helper_upload_observations.R	/^      verbose  = TRUE$/;"	v	function:fetch_survey_data
-version	global.R	/^  version    = 5,$/;"	g
-width	server.R	/^          width   = "35%",$/;"	n	list:columnDefs.anonList0e7c93dc0607
-width	server.R	/^          width   = "35%",$/;"	n	list:server.options.columnDefs.anonList0e7c93dc0107
-x	server.R	/^      x = surveys_api,$/;"	v	function:server
-y	server.R	/^      echarts4r::e_axis_labels(y = "per cent")$/;"	v	function:server
-year	helper_format_surveys.R	/^      year = lubridate::year(creationDate),$/;"	v	function:format_surveys
+!_TAG_ROLE_DESCRIPTION!Sh!heredoc	endmarker	/end marker/
+!_TAG_ROLE_DESCRIPTION!Sh!script	loaded	/loaded/
+"Aggression"	R/global.R	/^  "Aggression"              = "#67001F",$/;"	n	vector:behaviour_type_colors
+"Cognitive"	R/global.R	/^  "Cognitive"               = "#AA9486",$/;"	n	vector:behaviour_type_colors
+"Emotional"	R/global.R	/^  "Emotional"               = "#B6854D",$/;"	n	vector:behaviour_type_colors
+"Inappropriate Behaviors"	R/global.R	/^  "Inappropriate Behaviors" = "#EAD3BF",$/;"	n	vector:behaviour_type_colors
+"Prosocial"	R/global.R	/^  "Prosocial"               = "#39312F"$/;"	n	vector:behaviour_type_colors
+"last_modified"	R/helper_format_surveys.R	/^        "last_modified" = "latest"$/;"	n	vector:format_surveys.by
+"response"	R/server.R	/^        by = c("response" = "behaviour")$/;"	n	vector:server.by
+.con	R/helper_query_observations.R	/^    .con = DBI::ANSI()$/;"	v	function:query_class_observations
+.con	R/helper_query_surveys.R	/^    .con = DBI::ANSI()$/;"	v	function:query_surveys
+.con	R/helper_query_surveys.R	/^    .con = DBI::ANSI()$/;"	v	function:query_surveys_semester
+.con	R/server.R	/^            .con = DBI::ANSI()$/;"	v	function:server.func
+.con	R/server.R	/^      .con = DBI::ANSI()$/;"	v	function:server
+.f	R/server.R	/^            .f        = cslqualtrics::fetch_survey_data,$/;"	v	function:server.func
+.x	R/server.R	/^            {\\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, conn/;"	v	function:server.func
+TA	R/server.R	/^            TA = response$/;"	v	function:server
+action	R/helper_sql_execution.R	/^        action      = shiny::a(href = "javascript:location.reload();", "reload the page")$/;"	v	function:run_interpolated_execution
+activity	R/server.R	/^          activity = response$/;"	v	function:server
+activity_types	R/helper_activity_types.R	/^  activity_types <- tibble::tribble($/;"	v	function:generate_activity_types
+all.names	R/server.R	/^        all.names = TRUE$/;"	v	function:server
+angle	R/server.R	/^        angle = 315,$/;"	v	function:server
+anonFunc760864970100	R/global.R	/^shiny::onStop(function() {$/;"	f
+anonFunc76b264dd0100	R/server.R	/^  session$onSessionEnded(function() {$/;"	f	function:server
+anonFunc76b264dd0b00	R/server.R	/^    }, warning = function(warn) {$/;"	f	function:server
+anonFunc76b264dd0c00	R/server.R	/^      }, warning = function(warn) {$/;"	f	function:server
+anonFunc902157280100	R/helper_sql_execution.R	/^  }, warning = function(warn) {$/;"	f	function:run_interpolated_query
+anonFunc902157280200	R/helper_sql_execution.R	/^  }, warning = function(warn) {$/;"	f	function:run_interpolated_execution
+anonList76b264dd0207	R/server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
+anonList76b264dd0307	R/server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
+anonList76b264dd0407	R/server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
+anonList76b264dd0507	R/server.R	/^        list($/;"	L	nameattr:server.options.columnDefs
+anonList76b264dd0707	R/server.R	/^        list($/;"	L	list:columnDefs
+anonList76b264dd0807	R/server.R	/^        list($/;"	L	list:columnDefs
+anonList76b264dd0907	R/server.R	/^        list($/;"	L	list:columnDefs
+anonList76b264dd0a07	R/server.R	/^        list($/;"	L	list:columnDefs
+append	R/helper_upload_observations.R	/^        append    = TRUE,$/;"	v	function:fetch_survey_data
+append	R/server.R	/^            append    = TRUE,$/;"	v	function:server.func
+application	README.md	/^### application$/;"	S	section:cslqualtrics
+autoWidth	R/server.R	/^      autoWidth     = FALSE,$/;"	n	list:server.options
+autoWidth	R/server.R	/^      autoWidth     = TRUE,$/;"	g
+axis.text.x	R/server.R	/^      axis.text.x = ggplot2::element_text($/;"	v	function:server
+axis.title.x	R/server.R	/^      axis.title.x     = ggplot2::element_blank(),$/;"	v	function:server
+bFilter	R/server.R	/^      bFilter       = 1,$/;"	g
+bFilter	R/server.R	/^      bFilter       = 1,$/;"	n	list:server.options
+bLengthChange	R/server.R	/^      bLengthChange = FALSE,$/;"	g
+bLengthChange	R/server.R	/^      bLengthChange = FALSE,$/;"	n	list:server.options
+bPaginate	R/server.R	/^      bPaginate     = FALSE,$/;"	g
+bPaginate	R/server.R	/^      bPaginate     = FALSE,$/;"	n	list:server.options
+bSort	R/server.R	/^      bSort         = TRUE,$/;"	g
+bSort	R/server.R	/^      bSort         = TRUE,$/;"	n	list:server.options
+base_query	R/helper_query_surveys.R	/^  base_query <- glue::glue_sql("$/;"	v	function:query_surveys
+base_query	R/helper_query_surveys.R	/^  base_query <- glue::glue_sql("$/;"	v	function:query_surveys_semester
+behaviour	R/server.R	/^          behaviour = response$/;"	v	function:server
+behaviour_levels	R/global.R	/^behaviour_levels <- c($/;"	c
+behaviour_type_colors	R/global.R	/^behaviour_type_colors <- c($/;"	c
+behaviour_types	R/helper_behaviour_types.R	/^  behaviour_types <- tibble::tribble($/;"	v	function:generate_behaviour_types
+bootswatch	R/global.R	/^  bootswatch = "zephyr"$/;"	g
+border	R/server.R	/^    border  = TRUE,$/;"	v	function:server
+by	R/helper_format_surveys.R	/^      by = c($/;"	c	function:format_surveys
+by	R/server.R	/^        by = c("response" = "behaviour")$/;"	c	function:server
+choices	R/server.R	/^      choices = students$/;"	v	function:server
+choices	R/ui.R	/^              choices   = "",$/;"	g
+choices	R/ui.R	/^              choices   = c("spring", "summer", "fall"),$/;"	c
+choices	R/ui.R	/^              choices   = c($/;"	c
+class	R/helper_format_surveys.R	/^      class = dplyr::case_when($/;"	v	function:format_surveys
+class	R/server.R	/^    class      = c("compact"),$/;"	c	function:server
+class	R/ui.R	/^              class   = "btn-success"$/;"	g
+class_observations	R/helper_query_observations.R	/^  class_observations <- run_interpolated_query(parameterized_query)$/;"	v	function:query_class_observations
+closeButton	R/helper_format_surveys.R	/^        closeButton = TRUE,$/;"	v	function:format_surveys
+closeButton	R/helper_sql_execution.R	/^        closeButton = TRUE,$/;"	v	function:run_interpolated_execution
+closeButton	R/helper_sql_execution.R	/^        closeButton = TRUE,$/;"	v	function:run_interpolated_execution.anonFunc902157280200
+closeButton	R/helper_sql_execution.R	/^        closeButton = TRUE,$/;"	v	function:run_interpolated_execution.anonFunc902157280200.error
+closeButton	R/helper_sql_execution.R	/^        closeButton = TRUE,$/;"	v	function:run_interpolated_query.anonFunc902157280100
+closeButton	R/helper_sql_execution.R	/^        closeButton = TRUE,$/;"	v	function:run_interpolated_query.anonFunc902157280100.error
+closeButton	R/server.R	/^            closeButton = TRUE,$/;"	v	function:server.anonFunc76b264dd0c00
+closeButton	R/server.R	/^            closeButton = TRUE,$/;"	v	function:server.anonFunc76b264dd0c00.error
+closeButton	R/server.R	/^          closeButton = TRUE,$/;"	v	function:server.anonFunc76b264dd0b00
+closeButton	R/server.R	/^          closeButton = TRUE,$/;"	v	function:server.anonFunc76b264dd0b00.error
+closeButton	R/server.R	/^        closeButton = TRUE,$/;"	v	function:server
+col.names	R/server.R	/^            col.names = c($/;"	c	function:server.func
+cols	R/helper_upload_observations.R	/^      cols      = tidyr::matches("^Q[0-9]+"),$/;"	v	function:fetch_survey_data
+columnDefs	R/server.R	/^      columnDefs    = list($/;"	L
+columnDefs	R/server.R	/^      columnDefs    = list($/;"	n	list:server.options	constructor:list
+conn	R/global.R	/^  conn      = this_pool,$/;"	g
+conn	R/helper_sql_execution.R	/^      conn      = this_pool,$/;"	v	function:run_interpolated_query
+conn	R/helper_upload_observations.R	/^        conn      = connection,$/;"	v	function:fetch_survey_data
+conn	R/server.R	/^            conn      = this_conn,$/;"	v	function:server.func
+creationDate	R/helper_format_surveys.R	/^      creationDate = as.POSIXct($/;"	v	function:format_surveys
+creation_date	R/helper_format_surveys.R	/^      creation_date = as.character(creation_date)$/;"	v	function:format_surveys
+cslqualtrics	README.md	/^## cslqualtrics$/;"	s
+dbname	R/global.R	/^  dbname   = "\/tmp\/cslobsdb.db",$/;"	g
+delete_outdated_obs	R/server.R	/^          delete_outdated_obs <- glue::glue_sql("$/;"	v	function:server.func
+direction	R/server.R	/^      direction = 1$/;"	v	function:server
+dom	R/server.R	/^      dom           = "tp", # deprecated in datatables (see note)$/;"	g
+dom	R/server.R	/^      dom           = "tp", # deprecated in datatables (see note)$/;"	n	list:server.options
+drop	R/server.R	/^      drop   = FALSE$/;"	v	function:server
+drv	R/global.R	/^  drv      = RSQLite::SQLite(),$/;"	g
+duration	R/helper_format_surveys.R	/^        duration    = 5,$/;"	v	function:format_surveys
+duration	R/helper_sql_execution.R	/^        duration    = NULL,$/;"	v	function:run_interpolated_execution
+duration	R/helper_sql_execution.R	/^        duration    = NULL,$/;"	v	function:run_interpolated_execution.anonFunc902157280200
+duration	R/helper_sql_execution.R	/^        duration    = NULL,$/;"	v	function:run_interpolated_execution.anonFunc902157280200.error
+duration	R/helper_sql_execution.R	/^        duration    = NULL,$/;"	v	function:run_interpolated_query.anonFunc902157280100
+duration	R/helper_sql_execution.R	/^        duration    = NULL,$/;"	v	function:run_interpolated_query.anonFunc902157280100.error
+duration	R/server.R	/^            duration    = NULL,$/;"	v	function:server.anonFunc76b264dd0c00
+duration	R/server.R	/^            duration    = NULL,$/;"	v	function:server.anonFunc76b264dd0c00.error
+duration	R/server.R	/^          duration    = NULL,$/;"	v	function:server.anonFunc76b264dd0b00
+duration	R/server.R	/^          duration    = NULL,$/;"	v	function:server.anonFunc76b264dd0b00.error
+duration	R/server.R	/^        duration    = 5,$/;"	v	function:server
+duration_in_seconds	R/helper_upload_observations.R	/^      duration_in_seconds = as.integer(duration_in_seconds),$/;"	v	function:fetch_survey_data
+end_date	R/helper_upload_observations.R	/^      end_date            = as.character(end_date),$/;"	v	function:fetch_survey_data
+error	R/helper_sql_execution.R	/^    }, error = function(err) {$/;"	f	function:run_interpolated_execution.anonFunc902157280200
+error	R/helper_sql_execution.R	/^    }, error = function(err) {$/;"	f	function:run_interpolated_query.anonFunc902157280100
+error	R/server.R	/^        }, error = function(err) {$/;"	f	function:server.anonFunc76b264dd0c00
+error	R/server.R	/^      }, error = function(err) {$/;"	f	function:server.anonFunc76b264dd0b00
+escape	R/server.R	/^    escape     = FALSE,$/;"	v	function:server
+extensions	R/server.R	/^    extensions = c("FixedHeader"),$/;"	c	function:server
+fetch_survey_data	R/helper_upload_observations.R	/^fetch_survey_data <- function($/;"	f
+fetch_survey_data_possibly	R/server.R	/^          fetch_survey_data_possibly <- purrr::possibly($/;"	v	function:server.func
+file navigation	README.md	/^### file navigation$/;"	S	section:cslqualtrics
+fill	R/server.R	/^          fill = type$/;"	v	function:server
+fillable	R/ui.R	/^          fillable = TRUE,$/;"	g
+filter	R/server.R	/^    filter     = "top",$/;"	v	function:server
+finished	R/helper_upload_observations.R	/^      finished            = as.logical(finished),$/;"	v	function:fetch_survey_data
+fixedHeader	R/server.R	/^      fixedHeader   = FALSE,$/;"	g
+fixedHeader	R/server.R	/^      fixedHeader   = FALSE,$/;"	n	list:server.options
+format_for_excel	R/format_for_excel.R	/^format_for_excel <- function($/;"	f
+format_surveys	R/helper_format_surveys.R	/^format_surveys <- function(surveys) {$/;"	f
+from_file	R/format_for_excel.R	/^  from_file <- read.csv($/;"	v	function:format_for_excel
+func	R/helper_sql_execution.R	/^      func = function(conn) {$/;"	f	function:run_interpolated_execution
+func	R/server.R	/^        func = function(this_conn) {$/;"	f	function:server
+generate_activity_types	R/helper_activity_types.R	/^generate_activity_types <- function() {$/;"	f
+generate_behaviour_types	R/helper_behaviour_types.R	/^generate_behaviour_types <- function() {$/;"	f
+height	R/ui.R	/^              height   = "600px"$/;"	g
+hjust	R/server.R	/^        hjust = 0$/;"	v	function:server
+hover	R/server.R	/^    hover   = TRUE,$/;"	v	function:server
+href	R/helper_sql_execution.R	/^        action      = shiny::a(href = "javascript:location.reload();", "reload the page")$/;"	v	function:run_interpolated_execution
+id	R/ui.R	/^              id    = "check_for_updates",$/;"	g
+id	R/ui.R	/^              id    = "update_observations",$/;"	g
+id	R/ui.R	/^              id    = "update_surveys",$/;"	g
+inputId	R/server.R	/^      inputId = "observation_students",$/;"	v	function:server
+inputId	R/ui.R	/^              inputId   = "observation_students",$/;"	g
+inputId	R/ui.R	/^              inputId   = "observations_semester",$/;"	g
+inputId	R/ui.R	/^              inputId   = "observations_year",$/;"	g
+inputId	R/ui.R	/^              inputId = "authenticate",$/;"	g
+inputId	R/ui.R	/^              inputId = "query_database",$/;"	g
+installation	README.md	/^### installation$/;"	S	section:cslqualtrics
+label	R/ui.R	/^              label     = "semester",$/;"	g
+label	R/ui.R	/^              label     = "students",$/;"	g
+label	R/ui.R	/^              label     = "year",$/;"	g
+label	R/ui.R	/^              label   = "authenticate",$/;"	g
+label	R/ui.R	/^              label   = "load data",$/;"	g
+label	R/ui.R	/^              label = "add updates"$/;"	g
+label	R/ui.R	/^              label = "check for updates"$/;"	g
+label	R/ui.R	/^              label = "update observations"$/;"	g
+lastModified	R/helper_format_surveys.R	/^      lastModified = as.POSIXct($/;"	v	function:format_surveys
+last_modified	R/helper_format_surveys.R	/^      last_modified = as.character(last_modified),$/;"	v	function:format_surveys
+last_modified_db	R/server.R	/^        dplyr::rename(last_modified_db = last_modified),$/;"	v	function:server
+latest	R/helper_format_surveys.R	/^    dplyr::summarise(latest = max(last_modified))$/;"	v	function:format_surveys
+main_from_global	app.R	/^main_from_global <- "hi from app"$/;"	g
+mapping	R/server.R	/^        mapping = ggplot2::aes($/;"	v	function:server
+most_recent	R/helper_format_surveys.R	/^  most_recent <- surveys_filtered |>$/;"	v	function:format_surveys
+multiple	R/ui.R	/^              multiple  = FALSE,$/;"	g
+n	R/server.R	/^        n       = dplyr::n(),$/;"	v	function:server
+name	R/helper_upload_observations.R	/^        name      = "observations",$/;"	v	function:fetch_survey_data
+name	R/server.R	/^            name      = "surveys",$/;"	v	function:server.func
+names_from	R/server.R	/^          names_from  = behaviour,$/;"	v	function:server
+names_to	R/helper_upload_observations.R	/^      names_to  = "question",$/;"	v	function:fetch_survey_data
+new_or_updated	R/server.R	/^    new_or_updated <- dplyr::bind_rows($/;"	v	function:server
+new_surveys	R/server.R	/^    new_surveys <- new_surveys_reactive() |>$/;"	v	function:server
+new_surveys_reactive	R/server.R	/^  new_surveys_reactive <- shiny::reactive({$/;"	v	function:server
+observation_expected_cols	R/global.R	/^observation_expected_cols <- c($/;"	c
+observation_surveys	R/helper_format_surveys.R	/^  observation_surveys <- surveys[grepl("spring|summer|fall", surveys$name, ignore.case = TRUE), /;"	v	function:format_surveys
+observations	R/server.R	/^    observations <- query_class_observations(survey)$/;"	v	function:server
+observations_data_reactive	R/server.R	/^  observations_data_reactive <- shiny::reactive({$/;"	v	function:server
+open	R/ui.R	/^            open     = TRUE,$/;"	g
+open	R/ui.R	/^        open = FALSE,$/;"	g
+options	R/server.R	/^    options    = list($/;"	L	function:server
+otherwise	R/server.R	/^            otherwise = NULL$/;"	v	function:server.func
+outputId	R/ui.R	/^              outputId = "behaviour_view",$/;"	g
+outputId	R/ui.R	/^              outputId = "location_view",$/;"	g
+overview	README.md	/^### overview$/;"	S	section:cslqualtrics
+overwrite	R/helper_upload_observations.R	/^        overwrite = FALSE,$/;"	v	function:fetch_survey_data
+overwrite	R/server.R	/^            overwrite = FALSE,$/;"	v	function:server.func
+pageLength	R/server.R	/^      pageLength    = 10,$/;"	g
+pageLength	R/server.R	/^      pageLength    = 10,$/;"	n	list:server.options
+palette	R/server.R	/^      palette   = "YlOrRd",$/;"	v	function:server
+panel.grid.minor	R/server.R	/^      panel.grid.minor = ggplot2::element_blank(),$/;"	v	function:server
+parameterized_query	R/helper_query_observations.R	/^  parameterized_query <- glue::glue_sql("$/;"	v	function:query_class_observations
+percent	R/server.R	/^        percent = round((n \/ student_behaviours_sum) * 100)$/;"	v	function:server
+pkgapp	R/pkgapp.R	/^pkgapp <- function(options = list(port = 8001)) {$/;"	f
+plugins	R/server.R	/^    plugins    = c("ellipsis"),$/;"	c	function:server
+pool	R/helper_sql_execution.R	/^      pool = this_pool,$/;"	v	function:run_interpolated_execution
+pool	R/server.R	/^        pool = this_pool,$/;"	v	function:server
+position	R/ui.R	/^            position = "right",$/;"	g
+position	R/ui.R	/^  position = c("static-top"),$/;"	c
+progress	R/helper_upload_observations.R	/^      progress            = as.integer(progress),$/;"	v	function:fetch_survey_data
+queryResult	R/helper_sql_execution.R	/^    queryResult <- DBI::dbGetQuery($/;"	v	function:run_interpolated_query
+query_class_observations	R/helper_query_observations.R	/^query_class_observations <- function(survey_id) {$/;"	f
+query_surveys	R/helper_query_surveys.R	/^query_surveys <- function() {$/;"	f
+query_surveys_semester	R/helper_query_surveys.R	/^query_surveys_semester <- function($/;"	f
+recorded_date	R/helper_upload_observations.R	/^      recorded_date       = as.character(recorded_date),$/;"	v	function:fetch_survey_data
+reliability	R/helper_format_surveys.R	/^      reliability = dplyr::case_when($/;"	v	function:format_surveys
+render	R/server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(10)")$/;"	n	list:columnDefs.anonList76b264dd0807
+render	R/server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(10)")$/;"	n	list:server.options.columnDefs.anonList76b264dd0307
+render	R/server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(50)")$/;"	n	list:columnDefs.anonList76b264dd0907
+render	R/server.R	/^          render  = DT::JS("$.fn.dataTable.render.ellipsis(50)")$/;"	n	list:server.options.columnDefs.anonList76b264dd0407
+response	R/server.R	/^        response = factor($/;"	v	function:server
+response_x_child	R/format_for_excel.R	/^  response_x_child <- reshape($/;"	v	function:format_for_excel
+row.names	R/helper_upload_observations.R	/^        row.names = FALSE$/;"	v	function:fetch_survey_data
+row.names	R/server.R	/^            row.names = FALSE,$/;"	v	function:server.func
+rownames	R/server.R	/^    rownames   = FALSE,$/;"	v	function:server
+run_interpolated_execution	R/helper_sql_execution.R	/^run_interpolated_execution <- function($/;"	f
+run_interpolated_query	R/helper_sql_execution.R	/^run_interpolated_query <- function(interpolatedQuery) {$/;"	f
+scrollX	R/server.R	/^      scrollX       = TRUE,$/;"	g
+scrollX	R/server.R	/^      scrollX       = TRUE,$/;"	n	list:server.options
+searchable	R/server.R	/^          searchable = FALSE$/;"	n	list:columnDefs.anonList76b264dd0a07
+searchable	R/server.R	/^          searchable = FALSE$/;"	n	list:server.options.columnDefs.anonList76b264dd0507
+searching	R/server.R	/^      searching     = TRUE,$/;"	g
+searching	R/server.R	/^      searching     = TRUE,$/;"	n	list:server.options
+selection	R/server.R	/^    selection  = "single",$/;"	v	function:server
+selectize	R/ui.R	/^              selectize = FALSE$/;"	g
+semester	R/helper_format_surveys.R	/^      semester = dplyr::case_when($/;"	v	function:format_surveys
+semester_input	R/server.R	/^      semester_input <- input$observations_semester$/;"	v	function:server
+server	R/pkgapp.R	/^    server  = server,$/;"	v	function:pkgapp
+server	R/server.R	/^server <- function(input, output, session) {$/;"	f
+show.legend	R/server.R	/^      show.legend = TRUE$/;"	v	function:server
+shutdown	R/global.R	/^  shutdown = TRUE$/;"	g
+sidebar	R/ui.R	/^          sidebar  = bslib::sidebar($/;"	g
+single_survey_df	R/helper_upload_observations.R	/^    single_survey_df <- qualtRics::fetch_survey($/;"	v	function:fetch_survey_data
+size	R/server.R	/^      text             = ggplot2::element_text(size = 20)$/;"	v	function:server
+source_db	R/server.R	/^        dplyr::mutate(source_db = 1),$/;"	v	function:server
+spacing	R/server.R	/^    spacing = c("s"),$/;"	c	function:server
+start_date	R/helper_upload_observations.R	/^      start_date          = as.character(start_date),$/;"	v	function:fetch_survey_data
+stat	R/server.R	/^      stat        = "identity",$/;"	v	function:server
+statement	R/global.R	/^  statement = "PRAGMA foreign_keys = ON ;"$/;"	g
+statement	R/helper_sql_execution.R	/^      statement = interpolatedQuery$/;"	v	function:run_interpolated_query
+statement	R/server.R	/^          purrr::walk(update_last_modified, ~ DBI::dbExecute(statement = .x, conn = this_conn))$/;"	v	function:server.func
+status	R/server.R	/^      dplyr::mutate(status = "new") |>$/;"	v	function:server
+striped	R/server.R	/^    striped = TRUE,$/;"	v	function:server
+student_behaviours_sum	R/server.R	/^    student_behaviours_sum <- student_observations_data |>$/;"	v	function:server
+student_observations_data	R/server.R	/^    student_observations_data <- observations_data_reactive()[$/;"	v	function:server
+student_responses_ids	R/server.R	/^    student_responses_ids <- observations_data_reactive()[$/;"	v	function:server
+students	R/server.R	/^    students <- observations_data_reactive() |>$/;"	v	function:server
+suffix	R/server.R	/^      suffix = c("_api", "_db")$/;"	c	function:server
+survey	R/server.R	/^    survey <- surveys_data_reactive()[input$surveys_data_view_rows_selected, ]$id$/;"	v	function:server
+surveyID	R/helper_upload_observations.R	/^      surveyID = survey_id,$/;"	v	function:fetch_survey_data
+surveys	R/server.R	/^    surveys <- query_surveys()$/;"	v	function:server
+surveys_all_query	R/server.R	/^    surveys_all_query <- glue::glue_sql($/;"	v	function:server
+surveys_api	R/server.R	/^    surveys_api <- qualtRics::all_surveys()$/;"	v	function:server
+surveys_data_reactive	R/server.R	/^  surveys_data_reactive <- shiny::reactive({$/;"	v	function:server
+surveys_db	R/server.R	/^    surveys_db <- run_interpolated_query(surveys_all_query)$/;"	v	function:server
+surveys_filtered	R/helper_format_surveys.R	/^  surveys_filtered <- observation_surveys |>$/;"	v	function:format_surveys
+surveys_most_recent	R/helper_format_surveys.R	/^  surveys_most_recent <- surveys_filtered |>$/;"	v	function:format_surveys
+surveys_new	R/server.R	/^    surveys_new <- dplyr::full_join($/;"	v	function:server
+surveys_table	R/helper_query_surveys.R	/^  surveys_table <- run_interpolated_query(base_query)$/;"	v	function:query_surveys
+surveys_table	R/helper_query_surveys.R	/^  surveys_table <- run_interpolated_query(base_query)$/;"	v	function:query_surveys_semester
+surveys_to_update	R/server.R	/^    surveys_to_update <- query_surveys_semester($/;"	v	function:server
+surveys_updated	R/server.R	/^    surveys_updated <- dplyr::inner_join($/;"	v	function:server
+ta_behaviour	R/server.R	/^      ta_behaviour <- dplyr::inner_join($/;"	v	function:server
+ta_total	R/server.R	/^      ta_total <- ta_behaviour |>$/;"	v	function:server
+targets	R/server.R	/^          targets    = c(0),$/;"	n	list:columnDefs.anonList76b264dd0a07	constructor:c
+targets	R/server.R	/^          targets    = c(0, 6, 7, 8),$/;"	n	list:server.options.columnDefs.anonList76b264dd0507	constructor:c
+targets	R/server.R	/^          targets = c(0),$/;"	n	list:columnDefs.anonList76b264dd0807	constructor:c
+targets	R/server.R	/^          targets = c(0),$/;"	n	list:server.options.columnDefs.anonList76b264dd0307	constructor:c
+targets	R/server.R	/^          targets = c(1)$/;"	n	list:columnDefs.anonList76b264dd0707	constructor:c
+targets	R/server.R	/^          targets = c(1)$/;"	n	list:server.options.columnDefs.anonList76b264dd0207	constructor:c
+targets	R/server.R	/^          targets = c(1),$/;"	n	list:columnDefs.anonList76b264dd0907	constructor:c
+targets	R/server.R	/^          targets = c(1),$/;"	n	list:server.options.columnDefs.anonList76b264dd0407	constructor:c
+text	R/server.R	/^      text             = ggplot2::element_text(size = 20)$/;"	v	function:server
+theme	R/ui.R	/^  theme    = this_theme,$/;"	g
+this_pool	R/global.R	/^this_pool <- pool::dbPool($/;"	g
+this_theme	R/global.R	/^this_theme <- bslib::bs_theme($/;"	g
+title	R/ui.R	/^          title = "behaviour by TA",$/;"	g
+title	R/ui.R	/^          title = "behaviour by activity (location)",$/;"	g
+title	R/ui.R	/^          title = "behaviour by student",$/;"	g
+title	R/ui.R	/^    title = "explore data",$/;"	g
+title	R/ui.R	/^    title = "utilities",$/;"	g
+title	R/ui.R	/^  title    = paste0("CSL: ", round(rnorm(1), 2)),$/;"	g
+total	R/server.R	/^        dplyr::summarise(total = dplyr::n()) |>$/;"	v	function:server
+type	R/helper_format_surveys.R	/^        type        = "error"$/;"	v	function:format_surveys
+type	R/helper_sql_execution.R	/^        type        = "error"$/;"	v	function:run_interpolated_execution.anonFunc902157280200.error
+type	R/helper_sql_execution.R	/^        type        = "error"$/;"	v	function:run_interpolated_query.anonFunc902157280100.error
+type	R/helper_sql_execution.R	/^        type        = "message",$/;"	v	function:run_interpolated_execution
+type	R/helper_sql_execution.R	/^        type        = "warning"$/;"	v	function:run_interpolated_execution.anonFunc902157280200
+type	R/helper_sql_execution.R	/^        type        = "warning"$/;"	v	function:run_interpolated_query.anonFunc902157280100
+type	R/server.R	/^            type        = "error"$/;"	v	function:server.anonFunc76b264dd0c00.error
+type	R/server.R	/^            type        = "warning"$/;"	v	function:server.anonFunc76b264dd0c00
+type	R/server.R	/^          type        = "error"$/;"	v	function:server.anonFunc76b264dd0b00.error
+type	R/server.R	/^          type        = "warning"$/;"	v	function:server.anonFunc76b264dd0b00
+type	R/server.R	/^        type        = "message"$/;"	v	function:server
+ui	R/helper_format_surveys.R	/^        ui          = "semester, year, or class not determined for at least one survey",$/;"	v	function:format_surveys
+ui	R/helper_sql_execution.R	/^        ui          = "successfully uploaded",$/;"	v	function:run_interpolated_execution
+ui	R/helper_sql_execution.R	/^        ui          = paste("there is a warning:  ", warn),$/;"	v	function:run_interpolated_execution.anonFunc902157280200
+ui	R/helper_sql_execution.R	/^        ui          = paste("there is a warning:  ", warn),$/;"	v	function:run_interpolated_query.anonFunc902157280100
+ui	R/helper_sql_execution.R	/^        ui          = paste("there was an error:  ", err),$/;"	v	function:run_interpolated_execution.anonFunc902157280200.error
+ui	R/helper_sql_execution.R	/^        ui          = paste("there was an error:  ", err),$/;"	v	function:run_interpolated_query.anonFunc902157280100.error
+ui	R/pkgapp.R	/^    ui      = ui,$/;"	v	function:pkgapp
+ui	R/server.R	/^            ui          = paste("there is a warning:  ", warn),$/;"	v	function:server.anonFunc76b264dd0c00
+ui	R/server.R	/^            ui          = paste("there was an error:  ", err),$/;"	v	function:server.anonFunc76b264dd0c00.error
+ui	R/server.R	/^          ui          = paste("there is a warning:  ", warn),$/;"	v	function:server.anonFunc76b264dd0b00
+ui	R/server.R	/^          ui          = paste("there was an error:  ", err),$/;"	v	function:server.anonFunc76b264dd0b00.error
+ui	R/server.R	/^        ui          = "database is up to date",$/;"	v	function:server
+ui	R/ui.R	/^ui <- bslib::page_navbar($/;"	g
+update_last_modified	R/server.R	/^          update_last_modified <- glue::glue_sql("$/;"	v	function:server.func
+update_observations_updated_at	inst/bash/create_tables.sql	/^CREATE TRIGGER update_observations_updated_at$/;"	T	table:observations
+update_surveys_updated_at	inst/bash/create_tables.sql	/^CREATE TRIGGER update_surveys_updated_at$/;"	T	table:surveys
+updated_surveys	R/server.R	/^    updated_surveys <- new_surveys_reactive() |>$/;"	v	function:server
+ux_surveys_semester_year_class_reliability_is_active	inst/bash/create_tables.sql	/^create unique index ux_surveys_semester_year_class_reliability_is_active on `surveys` (semester,/;"	i
+value	R/helper_upload_observations.R	/^        value     = single_survey_df,$/;"	v	function:fetch_survey_data
+value	R/server.R	/^            value     = new_surveys,$/;"	v	function:server.func
+values	R/server.R	/^      values = behaviour_type_colors,$/;"	v	function:server
+values_from	R/server.R	/^          values_from = n$/;"	v	function:server
+values_to	R/helper_upload_observations.R	/^      values_to = "response"$/;"	v	function:fetch_survey_data
+verbose	R/helper_upload_observations.R	/^      verbose  = TRUE$/;"	v	function:fetch_survey_data
+version	R/global.R	/^  version    = 5,$/;"	g
+vjust	R/server.R	/^        vjust = 1,$/;"	v	function:server
+width	R/server.R	/^          width   = "35%",$/;"	n	list:columnDefs.anonList76b264dd0707
+width	R/server.R	/^          width   = "35%",$/;"	n	list:server.options.columnDefs.anonList76b264dd0207
+x	R/server.R	/^          x    = response,$/;"	v	function:server
+y	R/server.R	/^        y  = cslqualtrics::behaviour_types,$/;"	v	function:server
+year	R/helper_format_surveys.R	/^      year = stringr::str_extract(name, "[0-9]{4,}"),$/;"	v	function:format_surveys
+year_input	R/server.R	/^      year_input     <- input$observations_year$/;"	v	function:server

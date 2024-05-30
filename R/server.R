@@ -209,7 +209,7 @@ server <- function(input, output, session) {
   })
 
 
-  # behaviour by activity(location) --------------------------------------------
+  # behaviour by activity (location) -------------------------------------------
 
   output$location_view <- shiny::renderPlot({
 
@@ -448,7 +448,7 @@ server <- function(input, output, session) {
   #   "class"
   #   "reliability"
 
-  shiny::observeEvent(input$update_database, {
+  shiny::observeEvent(input$update_surveys, {
 
     shiny::req(nrow(new_surveys_reactive()) > 0)
 
@@ -530,6 +530,13 @@ server <- function(input, output, session) {
           ) |>
             {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, connection = this_conn))}()
 
+          shiny::showNotification(
+            ui          = "update complete",
+            duration    = 8,
+            closeButton = TRUE,
+            type        = "message"
+          )
+
         } # close poolWithTransaction func
       ) # close poolWithTransaction
 
@@ -555,6 +562,91 @@ server <- function(input, output, session) {
 
   }) # close shiny::observeEvent(input$update_database)
 
+  # update observations --------------------------------------------------------
+
+  shiny::observeEvent(input$update_observations, {
+
+    shiny::isolate({
+      year_input     <- input$observations_year
+      semester_input <- input$observations_semester
+    })
+
+    surveys_to_update <- query_surveys_semester(
+      this_year     = year_input,
+      this_semester = semester_input
+    )
+
+    if (nrow(surveys_to_update) > 0) {
+
+      tryCatch({
+
+        pool::poolWithTransaction(
+          pool = this_pool,
+          func = function(this_conn) {
+
+            # delete observations of updated surveys
+
+            delete_outdated_obs <- glue::glue_sql("
+              DELETE from observations
+              WHERE survey_id IN ({ surveys_to_update$id* })
+              ;
+              ",
+              .con = DBI::ANSI()
+            )
+
+            DBI::dbExecute(
+              conn      = this_conn,
+              statement = delete_outdated_obs
+            )
+
+            # add observations for new and updated surveys
+
+            fetch_survey_data_possibly <- purrr::possibly(
+              .f        = cslqualtrics::fetch_survey_data,
+              otherwise = NULL
+            )
+
+            split(
+              x = surveys_to_update,
+              f = surveys_to_update$id
+            ) |>
+              {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, connection = this_conn))}()
+
+          } # close poolWithTransaction func
+        ) # close poolWithTransaction
+
+      }, warning = function(warn) {
+
+          shiny::showNotification(
+            ui          = paste("there is a warning:  ", warn),
+            duration    = NULL,
+            closeButton = TRUE,
+            type        = "warning"
+          )
+
+        }, error = function(err) {
+
+          shiny::showNotification(
+            ui          = paste("there was an error:  ", err),
+            duration    = NULL,
+            closeButton = TRUE,
+            type        = "error"
+          )
+
+        }) # close upload try catch
+
+    } else {
+
+      shiny::showNotification(
+        ui          = "nothing found try updating surveys first",
+        duration    = NULL,
+        closeButton = TRUE,
+        type        = "message"
+      )
+
+    }
+
+  })
 
 
   # debugging ------------------------------------------------------------------

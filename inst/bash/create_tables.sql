@@ -8,7 +8,7 @@ CREATE TABLE `surveys` (
   `creation_date` TEXT,
   `is_active` INTEGER,
   `semester` TEXT NOT NULL,
-  `year` REAL NOT NULL,
+  `year` INTEGER NOT NULL,
   `class` TEXT NOT NULL,
   `reliability` INTEGER NOT NULL,
   `created_at` TEXT NOT NULL DEFAULT current_timestamp,
@@ -50,5 +50,17 @@ CREATE TABLE `observations` (
   `user_language` TEXT,
   `question` TEXT,
   `response` TEXT,
+  `created_at` TEXT NOT NULL DEFAULT current_timestamp,
+  `updated_at` TEXT NOT NULL DEFAULT current_timestamp,
   FOREIGN KEY (survey_id) REFERENCES surveys (id)
 );
+
+CREATE TRIGGER update_observations_updated_at
+AFTER UPDATE ON observations
+WHEN old.updated_at <> current_timestamp
+BEGIN
+    UPDATE observations
+    SET updated_at = CURRENT_TIMESTAMP
+    WHERE rowid = OLD.rowid;
+END
+;

@@ -6,6 +6,7 @@
 #' import shiny
 #' import bslib
 #' importFrom DT DTOutput
+#' importFrom lubridate year
 #'
 #' @export
 #'
@@ -125,19 +126,40 @@ ui <- bslib::page_navbar(
             bslib::input_task_button(
               id    = "check_for_updates",
               label = "check for updates"
-              # class   = "btn-success"
             ),
 
             bslib::input_task_button(
-              id    = "update_database",
+              id    = "update_surveys",
               label = "add updates"
-              # class   = "btn-success"
             ),
 
-            "OBSERVATIONS"
+            "OBSERVATIONS",
+
+            shiny::selectInput(
+              inputId   = "observations_year",
+              label     = "year",
+              choices   = c(
+                lubridate::year(Sys.Date()),
+                lubridate::year(Sys.Date()) - 1)
+              ,
+              multiple  = FALSE,
+              selectize = FALSE
+            ),
+            shiny::selectInput(
+              inputId   = "observations_semester",
+              label     = "semester",
+              choices   = c("spring", "summer", "fall"),
+              multiple  = FALSE,
+              selectize = FALSE
+            ),
+
+            bslib::input_task_button(
+              id    = "update_observations",
+              label = "update observations"
+            ),
 
           ), # close sidebar
-          DT::DTOutput("new_surveys_view"),
+          DT::DTOutput("new_surveys_view")
         ) # close layout_sidebar
 
       ) # close card

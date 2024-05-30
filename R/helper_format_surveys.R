@@ -133,17 +133,27 @@ format_surveys <- function(surveys) {
     )
   ) {
 
-    shiny::showNotification(
-      ui          = "semester, year, or class not determined for at least one survey",
-      duration    = 5,
-      closeButton = TRUE,
-      type        = "error"
-    )
+    if (shiny::isRunning()) {
+
+      shiny::showNotification(
+        ui          = "semester, year, or class not determined for at least one survey",
+        duration    = 5,
+        closeButton = TRUE,
+        type        = "error"
+      )
+
+    } else {
+
+      print("semester, year, or class not determined for at least one survey")
+
+    }
 
     stop()
 
   }
 
+
+  # return
 
   return(surveys_most_recent)
 
