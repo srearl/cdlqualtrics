@@ -24,11 +24,83 @@
 #'
 server <- function(input, output, session) {
 
-  # TEMPORARY DURING DEVELOPMENT ONLY
+  # force stop -----------------------------------------------------------------
 
   session$onSessionEnded(function() {
+
+    cat("close pool from session\n")
+
+    shiny::observe(
+      pool::poolClose(connection$this_conn)
+    )
+
     shiny::stopApp()
+
   })
+
+
+  # connection -----------------------------------------------------------------
+
+  connection <<- shiny::reactiveValues(this_conn = NULL)
+
+  shiny::observeEvent(input$load_database, {
+
+    if (file.exists(input$sqlite_file)) {
+
+      tryCatch({
+
+        connection$this_conn <- pool::dbPool(
+          drv      = RSQLite::SQLite(),
+          dbname   = input$sqlite_file,
+          shutdown = TRUE
+        )
+
+        DBI::dbExecute(
+          conn      = connection$this_conn,
+          statement = "PRAGMA foreign_keys = ON ;"
+        )
+
+        shiny::showNotification(
+          ui          = "connected",
+          duration    = 5,
+          closeButton = TRUE,
+          type        = "message"
+        )
+
+      }, error = function(err) {
+
+          shiny::showNotification(
+            ui          = paste("could not connect: ", err),
+            duration    = NULL,
+            closeButton = TRUE,
+            type        = "error"
+          )
+
+        })
+
+    } else {
+
+      shiny::showNotification(
+        ui          = paste("file does not exist"),
+        duration    = 5,
+        closeButton = TRUE,
+        type        = "warning"
+      )
+    }
+
+  })
+
+  test_data_reactive <- shiny::reactive({
+
+    some_stuff <- DBI::dbGetQuery(
+      conn = connection$this_conn,
+      statement = "select * from surveys limit 3 ;"
+    )
+
+    return(some_stuff)
+
+  }) |>
+    shiny::bindEvent(input$test_database)
 
 
   # surveys --------------------------------------------------------------------
@@ -463,13 +535,13 @@ server <- function(input, output, session) {
     tryCatch({
 
       pool::poolWithTransaction(
-        pool = this_pool,
-        func = function(this_conn) {
+        pool = connection$this_conn,
+        func = function(transaction_conn) {
 
           # add new surveys
 
           DBI::dbWriteTable(
-            conn      = this_conn,
+            conn      = transaction_conn,
             name      = "surveys",
             value     = new_surveys,
             overwrite = FALSE,
@@ -500,7 +572,7 @@ server <- function(input, output, session) {
             .con = DBI::ANSI()
           )
 
-          purrr::walk(update_last_modified, ~ DBI::dbExecute(statement = .x, conn = this_conn))
+          purrr::walk(update_last_modified, ~ DBI::dbExecute(statement = .x, conn = transaction_conn))
 
           # delete observations of updated surveys
 
@@ -513,7 +585,7 @@ server <- function(input, output, session) {
           )
 
           DBI::dbExecute(
-            conn      = this_conn,
+            conn      = transaction_conn,
             statement = delete_outdated_obs
           )
 
@@ -528,7 +600,7 @@ server <- function(input, output, session) {
             x = new_surveys_reactive(),
             f = new_surveys_reactive()$id
           ) |>
-            {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, connection = this_conn))}()
+            {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, connection = transaction_conn))}()
 
           shiny::showNotification(
             ui          = "update complete",
@@ -581,8 +653,8 @@ server <- function(input, output, session) {
       tryCatch({
 
         pool::poolWithTransaction(
-          pool = this_pool,
-          func = function(this_conn) {
+          pool = connection$this_conn,
+          func = function(transaction_conn) {
 
             # delete observations of updated surveys
 
@@ -595,7 +667,7 @@ server <- function(input, output, session) {
             )
 
             DBI::dbExecute(
-              conn      = this_conn,
+              conn      = transaction_conn,
               statement = delete_outdated_obs
             )
 
@@ -610,7 +682,7 @@ server <- function(input, output, session) {
               x = surveys_to_update,
               f = surveys_to_update$id
             ) |>
-              {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, connection = this_conn))}()
+              {\(row) purrr::walk(.x = row, ~ fetch_survey_data_possibly(survey_id  = .x$id, connection = transaction_conn))}()
 
           } # close poolWithTransaction func
         ) # close poolWithTransaction
@@ -667,5 +739,11 @@ server <- function(input, output, session) {
   # shiny::observe(print(new_surveys_reactive() |> data.frame()))
   # shiny::observe(print(input$surveys_data_view_rows_selected))
   # shiny::observe(print(head(behaviour_view())))
+  # shiny::observe(print(input$sqlite_file))
+  shiny::observe(print(test_data_reactive()))
+  shiny::observe(if(!is.null(connection$this_conn)) { print(DBI::dbGetInfo(connection$this_conn)) })
+  # shiny::observe(print(DBI::dbGetInfo(connection$this_conn)))
+  # shiny::observe(print(connection$this_conn))
+  shiny::observe(print(is.null(connection$this_conn)))
 
 } # close server

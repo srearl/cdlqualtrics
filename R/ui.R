@@ -17,6 +17,91 @@ ui <- bslib::page_navbar(
   theme    = this_theme,
 
   bslib::nav_panel(
+    title = "utilities",
+    shiny::p("database administration"),
+
+    shiny::fluidRow(
+
+      bslib::card(
+
+        bslib::layout_sidebar(
+          fillable = TRUE,
+          sidebar  = bslib::sidebar(
+            position = "right",
+            open     = TRUE,
+
+            # shiny::actionButton(
+            #   inputId = "authenticate",
+            #   label   = "authenticate",
+            #   class   = "btn-success"
+            # ),
+
+            shiny::textInput(
+              inputId     = "sqlite_file",
+              label       = "full path to database",
+              value       = "/tmp/cslobsdb.db",
+              width       = NULL,
+              placeholder = NULL
+            ),
+            shiny::actionButton(
+              inputId = "load_database",
+              label   = "load database",
+              class   = "btn-success"
+            ),
+            shiny::actionButton(
+              inputId = "test_database",
+              label   = "test database",
+              class   = "btn-success"
+            ),
+
+            "SURVEYS",
+
+            bslib::input_task_button(
+              id    = "check_for_updates",
+              label = "check for updates"
+            ),
+
+            bslib::input_task_button(
+              id    = "update_surveys",
+              label = "add updates"
+            ),
+
+            "OBSERVATIONS",
+
+            shiny::selectInput(
+              inputId   = "observations_year",
+              label     = "year",
+              choices   = c(
+                lubridate::year(Sys.Date()),
+                lubridate::year(Sys.Date()) - 1)
+              ,
+              multiple  = FALSE,
+              selectize = FALSE
+            ),
+            shiny::selectInput(
+              inputId   = "observations_semester",
+              label     = "semester",
+              choices   = c("spring", "summer", "fall"),
+              multiple  = FALSE,
+              selectize = FALSE
+            ),
+
+            bslib::input_task_button(
+              id    = "update_observations",
+              label = "update observations"
+            ),
+
+          ), # close sidebar
+          DT::DTOutput("new_surveys_view")
+        ) # close layout_sidebar
+
+      ) # close card
+
+    ) # close top fluidRow
+
+  ), # close nav_panel utilities
+
+  bslib::nav_panel(
     title = "explore data",
     shiny::p("explore data"),
 
@@ -99,73 +184,6 @@ ui <- bslib::page_navbar(
     # br()
     # shiny::verbatimTextOutput(outputId = "mod_vals")
 
-  ), # close nav_panel explore data
-
-  bslib::nav_panel(
-    title = "utilities",
-    shiny::p("database administration"),
-
-    shiny::fluidRow(
-
-      bslib::card(
-
-        bslib::layout_sidebar(
-          fillable = TRUE,
-          sidebar  = bslib::sidebar(
-            position = "right",
-            open     = TRUE,
-
-            shiny::actionButton(
-              inputId = "authenticate",
-              label   = "authenticate",
-              class   = "btn-success"
-            ),
-
-            "SURVEYS",
-
-            bslib::input_task_button(
-              id    = "check_for_updates",
-              label = "check for updates"
-            ),
-
-            bslib::input_task_button(
-              id    = "update_surveys",
-              label = "add updates"
-            ),
-
-            "OBSERVATIONS",
-
-            shiny::selectInput(
-              inputId   = "observations_year",
-              label     = "year",
-              choices   = c(
-                lubridate::year(Sys.Date()),
-                lubridate::year(Sys.Date()) - 1)
-              ,
-              multiple  = FALSE,
-              selectize = FALSE
-            ),
-            shiny::selectInput(
-              inputId   = "observations_semester",
-              label     = "semester",
-              choices   = c("spring", "summer", "fall"),
-              multiple  = FALSE,
-              selectize = FALSE
-            ),
-
-            bslib::input_task_button(
-              id    = "update_observations",
-              label = "update observations"
-            ),
-
-          ), # close sidebar
-          DT::DTOutput("new_surveys_view")
-        ) # close layout_sidebar
-
-      ) # close card
-
-    ) # close top fluidRow
-
-  ) # close nav_panel utilities
+  ) # close nav_panel explore data
 
 ) # close page_navbar

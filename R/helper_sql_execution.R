@@ -16,7 +16,8 @@ run_interpolated_query <- function(interpolatedQuery) {
   tryCatch({
 
     queryResult <- DBI::dbGetQuery(
-      conn      = this_pool,
+      # conn      = this_pool,
+      conn      = connection$this_conn,
       statement = interpolatedQuery
     )
 

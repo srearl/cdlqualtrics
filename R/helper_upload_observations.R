@@ -39,7 +39,7 @@ fetch_survey_data <- function(
 
   )
 
-  message("survey: ", survey_id, "rows: ", nrow(single_survey_df))
+  message("survey: ", survey_id, " rows: ", nrow(single_survey_df))
 
 
   # format observation data

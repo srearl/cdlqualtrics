@@ -14,7 +14,7 @@
 #'
 #' @export
 #'
-query_surveys <- function() {
+query_surveys <- function(query_conn) {
 
   base_query <- glue::glue_sql("
     SELECT
