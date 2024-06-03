@@ -16,6 +16,7 @@ Imports:
     dplyr,
     DT,
     echarts4r,
+    ggplot2,
     glue,
     janitor,
     lobstr,
