@@ -40,6 +40,13 @@ QUALTRICS_BASE_URL = 'xxxxxx'
 
 To launch the application, run `cslqualtrics::pkgapp()` in an R console. The application will launch (likely) in a RStudio browser; however, this is not the best viewing environment so open the application in a browser by pressing the `Open in Browser` button of the RStudio viewer, which will open the application in the default browser of the user's computer. The application was developed and tested using Firefox but any modern browser should be sufficient for interfacing with the application.
 
+**developer note** for prototyping during development, reload and launch the app via
+
+```r
+devtools::load_all()
+cslqualtrics::pkgapp()
+```
+
 #### navigation
 
 The application consists of two suites of functionality in two top-level tabs: (1) *utilities* to connect to and manage (update) the database, and (2) *explore data* to explore observation data.
